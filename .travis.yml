@@ -1,6 +1,8 @@
 language: node_js
 node_js:
 - '0.10'
+before_install:
+    npm install -g karma-cli
 notifications:
   slack:
     secure: A+kdWB5n3JGLECLLPuECcjjUlykZzZv8t6yIFtwlEhqWceiRcAkFWjRfa2rWJiDXYqctj4sPtZ8A+/lmPJgrq7M5XQjgqLr7LvqOJZc+zm1BpZhEA6+BNGR2ZplVJJ45sFug8j2WpZx1kRrNNT/1sm/c1rfBcCBfZfvxAyzCYfs=
