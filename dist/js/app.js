@@ -12,15 +12,15 @@ angular.module('product-details', [
     suggestions.name
 ]);
 },{"./product-images":4,"./product-info":5,"./suggestions":6,"angular":"iBmHg2"}],2:[function(require,module,exports){
-module.exports = '<div>\n    Color Swatch Template: {{fromCtrl}}\n</div>';
+module.exports = '<div>Color Swatch Template: {{fromCtrl}} yeah</div>';
 },{}],3:[function(require,module,exports){
 'use strict';
 // is it better to use templateUrl with fragile relative path
 // or use a partial transform with browserfiy and
 // also "pre-compiling" the template
 // it should depend on the amount of writes done to the template
+var colorSwatch = require('./color-swatch.tpl.html');
 module.exports = function() {
-    var colorSwatch = require('./color-swatch.tpl.html');
     return {
         scope: true,
         restrict: 'EA',

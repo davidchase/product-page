@@ -39,6 +39,9 @@ module.exports = function(config) {
             'test/*.js': ['browserify']
         },
 
+        browserify: {
+            transform: ['partialify']
+        },
 
         // test results reporter to use
         // possible values: 'dots', 'progress'
@@ -65,7 +68,7 @@ module.exports = function(config) {
 
         // start these browsers
         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-        browsers: ['Chrome', 'PhantomJS'],
+        browsers: ['Chrome'],
 
 
         // Continuous Integration mode

@@ -13,6 +13,7 @@ test('angular is loaded on the page', function() {
     return angular.should.be.ok;
 });
 
+
 test('product details module exists', function() {
     return productDetails.should.not.equal(null);
 });

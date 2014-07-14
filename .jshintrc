@@ -18,5 +18,14 @@
     "globals": {
         "angular": true
     },
-    "predef": ["describe", "it", "should", "before", "suite", "test","setup"]
+    "predef": [
+        "describe",
+        "it",
+        "should",
+        "before",
+        "suite",
+        "test",
+        "setup",
+        "inject"
+    ]
 }
