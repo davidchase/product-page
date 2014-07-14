@@ -8,9 +8,11 @@ module.exports = function() {
     return {
         scope: true,
         restrict: 'EA',
-        controller: function($scope) {
-            $scope.fromCtrl = 'Loaded from controller';
-        },
+        controller: ['$scope',
+            function($scope) {
+                $scope.fromCtrl = 'Loaded from controller';
+            }
+        ],
         template: colorSwatch,
         link: function(scope, element) {
             scope.el = element[0];

@@ -15,6 +15,7 @@
     "browser": true,
     "freeze": true,
     "multistr": true,
+    "unused": true,
     "globals": {
         "angular": true
     },
