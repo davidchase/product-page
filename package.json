@@ -7,7 +7,9 @@
     "install": "napa",
     "test": "./node_modules/karma/bin/karma start --single-run --browsers PhantomJS"
   },
-  "napa": {},
+  "napa": {
+    "angularjs": "angular/bower-angular"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/davidchase/product-page.git"
@@ -37,7 +39,7 @@
     "karma-mocha": "^0.1.4",
     "karma-mocha-reporter": "^0.2.8",
     "karma-phantomjs-launcher": "^0.1.4",
-    "lodash": "^2.4.1",
+    "lodash-node": "^2.4.1",
     "mocha": "^1.20.1",
     "napa": "^0.4.1",
     "partialify": "^3.1.1",
