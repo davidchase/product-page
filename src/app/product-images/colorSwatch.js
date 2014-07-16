@@ -16,7 +16,6 @@ module.exports = function() {
         template: colorSwatch,
         link: function(scope, element) {
             scope.el = element[0];
-            element.wrapInner('<strong/>');
         }
     };
 };
