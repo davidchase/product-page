@@ -1,12 +1,20 @@
 <div class="main-product">
-    <img data-ng-src="{{imageUrl}}{{product.colors[color.index].id}}_{{product.colors[0].viewCode[active.index]}}" />
+    <img data-ng-src="{{imageUrl}}{{product.colors[image.colorIndex].id}}_{{product.colors[0].viewCode[image.activeIndex]}}" />
 </div>
-<ul>
-    <li data-ng-repeat="image in product.colors">
+<ul class="thumbnails">
+    <li data-ng-repeat="color in product.colors">
         <img
-        ng-click="getIndex($index)"
-        class="image"
-        data-ng-src="{{imageUrl}}{{product.colors[color.index].id}}_{{image.viewCode[$index]}}?$detailthumb$"
+            ng-click="changeThumbnail($index)"
+            class="image"
+            data-ng-src="{{imageUrl}}{{product.colors[image.colorIndex].id}}_{{color.viewCode[$index]}}?$detailthumb$"
         />
     </li>
 </ul>
+<p>Color: {{image.selectedColor | capitalize}}</p>
+<img
+    class="color-swatch"
+    ng-click="changeColor($index)"
+    data-ng-repeat="color in product.colors"
+    data-ng-src="{{swatchUrl}}{{color.id}}_s.png"
+    data-color-name="{{color.displayName}}" 
+/>

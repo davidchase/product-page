@@ -12,5 +12,6 @@ module.exports = ['$scope', 'productService', 'imageUrl', 'swatchUrl',
             .catch(function(err) {
                 throw new Error(err.status + ' ' + err.data);
             });
+
     }
 ];

@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Product Details</title>
         <link rel="stylesheet" href="dist/css/reset.css">
+        <link rel="stylesheet" href="dist/css/style.css">
         <!-- <link rel="stylesheet" href="css/style.css"> -->
     </head>
     <body>
@@ -14,9 +15,7 @@
                 <h2 data-ng-bind="product.displayName">Product Name</h2>
                 <h4>Details &amp; Shopping</h4>
                 <p data-ng-bind-html="product.longDescription">Product Description</p>
-                <!-- Image Directive Here -->
-                <div class="product-images" data-product-images>
-                </div>
+                <div class="product-images" data-product-images></div>
             </div>
             <div data-color-swatch></div>
         </div>
