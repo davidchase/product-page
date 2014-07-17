@@ -5,10 +5,12 @@
   "main": "app.js",
   "scripts": {
     "install": "napa",
-    "test": "./node_modules/karma/bin/karma start --single-run --browsers PhantomJS"
+    "test": "./node_modules/karma/bin/karma start --single-run --browsers PhantomJS",
+    "start": "node server.js"
   },
   "napa": {
-    "angularjs": "angular/bower-angular"
+    "angularjs": "angular/bower-angular",
+    "angular-sanitize": "angular/bower-angular-sanitize"
   },
   "repository": {
     "type": "git",
@@ -32,6 +34,7 @@
     "errorhandler": "^1.1.1",
     "express": "^4.6.1",
     "gulp": "^3.8.6",
+    "gulp-compass": "^1.1.9",
     "gulp-jshint": "^1.7.1",
     "gulp-uglify": "^0.3.1",
     "gulp-util": "^2.2.20",
@@ -44,6 +47,7 @@
     "karma-phantomjs-launcher": "^0.1.4",
     "lodash-node": "^2.4.1",
     "mocha": "^1.20.1",
+    "morgan": "^1.1.1",
     "napa": "^0.4.1",
     "partialify": "^3.1.1",
     "should": "^4.0.4",

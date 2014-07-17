@@ -5,7 +5,7 @@ var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var uglify = require('gulp-uglify');
-var libs = ['angular'];
+var libs = ['angular', 'angular-sanitize/angular-sanitize'];
 
 gulp.task('vendor', function() {
     // create external libraries
@@ -21,7 +21,7 @@ gulp.task('vendor', function() {
         .on('error', function(err) {
             console.log(err);
         })
-        .pipe(gulp.dest('./dist/js'));
+        .pipe(gulp.dest('./client/dist/js'));
 });
 
 module.exports.libs = libs;

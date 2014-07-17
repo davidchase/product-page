@@ -5,7 +5,7 @@ var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var ugilfy = require('gulp-uglify');
-var index = ['./src/app'];
+var index = ['./client/src/app'];
 var libs = require('./vendor').libs;
 var html = require('partialify');
 
@@ -18,9 +18,9 @@ gulp.task('browserify', function() {
         .transform(html)
         .bundle()
         .pipe(source('app.js'))
-        .pipe(buffer())
-        .pipe(ugilfy())
-        .pipe(gulp.dest('./dist/js'))
+    // .pipe(buffer())
+    // .pipe(ugilfy())
+        .pipe(gulp.dest('./client/dist/js'))
         .on('error', function(err) {
             console.log(err);
         });

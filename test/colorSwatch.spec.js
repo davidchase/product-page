@@ -1,6 +1,6 @@
 'use strict';
 
-var index = require('../src/app');
+require('../client/src/app');
 var scope, element;
 
 setup(angular.mock.module('product-details'));

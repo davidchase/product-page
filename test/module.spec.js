@@ -1,6 +1,6 @@
 'use strict';
 
-var index = require('../src/app');
+require('../client/src/app');
 var productDetails = angular.module('product-details');
 
 
@@ -18,13 +18,8 @@ test('product details module exists', function() {
     return productDetails.should.not.equal(null);
 });
 
-test("productImages as a dependency of productDetails", function() {
-    return hasModule('product-images').should.be.true;
-});
-
-
-test("productInfo as a dependency of productDetails", function() {
-    return hasModule('product-info').should.be.true;
+test("product as a dependency of productDetails", function() {
+    return hasModule('product').should.be.true;
 });
 
 test("suggestions as a dependency of productDetails", function() {

@@ -3,7 +3,7 @@
 var gulp = require('gulp');
 var source = require('vinyl-source-stream');
 var libs = require('./vendor').libs;
-var index = ['./src/app'];
+var index = ['./client/src/app'];
 var watchify = require('watchify');
 var html = require('partialify');
 
@@ -25,7 +25,7 @@ gulp.task('watchify', function() {
             .transform(html)
             .bundle()
             .pipe(source('app.js'))
-            .pipe(gulp.dest('./dist/js'))
+            .pipe(gulp.dest('./client/dist/js'))
             .on('error', function(err) {
                 console.log(err);
             });
