@@ -12,20 +12,16 @@ module.exports = function() {
                 $scope.image = {
                     selectedColor: 'White',
                     activeIndex: 0,
-                    colorIndex: 0
+                    colorIndex: 0,
+                    activeSwatch: 0
                 };
                 $scope.changeThumbnail = function(index) {
-                    $scope.active = {
-                        index: index
-                    };
+                    $scope.image.activeIndex = index;
                 };
                 $scope.changeColor = function(index) {
-                    $scope.selected = {
-                        color: this.color.displayName
-                    };
-                    $scope.color = {
-                        index: index
-                    };
+                    $scope.image.selectedColor = this.color.displayName;
+                    $scope.image.colorIndex = index;
+                    $scope.image.activeSwatch = index;
                 };
             }
         ],

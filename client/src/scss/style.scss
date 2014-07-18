@@ -7,3 +7,11 @@ li {
 .color-swatch {
     margin: 0 2px;
 }
+
+.sizes {
+    display:none;
+}
+
+.selected .sizes {
+    display: block;
+}

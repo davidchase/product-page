@@ -51,27 +51,23 @@ module.exports = function() {
                 $scope.image = {
                     selectedColor: 'White',
                     activeIndex: 0,
-                    colorIndex: 0
+                    colorIndex: 0,
+                    activeSwatch: 0
                 };
                 $scope.changeThumbnail = function(index) {
-                    $scope.active = {
-                        index: index
-                    };
+                    $scope.image.activeIndex = index;
                 };
                 $scope.changeColor = function(index) {
-                    $scope.selected = {
-                        color: this.color.displayName
-                    };
-                    $scope.color = {
-                        index: index
-                    };
+                    $scope.image.selectedColor = this.color.displayName;
+                    $scope.image.colorIndex = index;
+                    $scope.image.activeSwatch = index;
                 };
             }
         ],
     };
 };
 },{"./product-images.tpl.html":4}],4:[function(require,module,exports){
-module.exports = '<div class="main-product">\n    <img data-ng-src="{{imageUrl}}{{product.colors[image.colorIndex].id}}_{{product.colors[0].viewCode[image.activeIndex]}}" />\n</div>\n<ul class="thumbnails">\n    <li data-ng-repeat="color in product.colors">\n        <img\n            ng-click="changeThumbnail($index)"\n            class="image"\n            data-ng-src="{{imageUrl}}{{product.colors[image.colorIndex].id}}_{{color.viewCode[$index]}}?$detailthumb$"\n        />\n    </li>\n</ul>\n<p>Color: {{image.selectedColor | capitalize}}</p>\n<img\n    class="color-swatch"\n    ng-click="changeColor($index)"\n    data-ng-repeat="color in product.colors"\n    data-ng-src="{{swatchUrl}}{{color.id}}_s.png"\n    data-color-name="{{color.displayName}}" \n/>';
+module.exports = '<div class="main-product">\n    <img data-ng-src="{{imageUrl}}{{product.colors[image.colorIndex].id}}_{{product.colors[0].viewCode[image.activeIndex]}}" />\n</div>\n<ul class="thumbnails">\n    <li data-ng-repeat="color in product.colors">\n        <img\n        ng-click="changeThumbnail($index)"\n        class="image"\n        data-ng-src="{{imageUrl}}{{product.colors[image.colorIndex].id}}_{{color.viewCode[$index]}}?$detailthumb$"\n        />\n    </li>\n</ul>\n<p>\n    Color: {{image.selectedColor | capitalize}}\n</p>\n<!-- Product Swatches-->\n<div\n    class="swatches"\n    data-ng-repeat-start="color in product.colors">\n\n    <img\n    data-ng-click="changeColor($index)"\n    data-ng-src="{{swatchUrl}}{{color.id}}_s.png"\n    data-color-name="{{color.displayName}}" />\n    \n</div>\n<!-- Product Size-->\n<div \n    data-ng-repeat-end\n    data-ng-class="{selected: $index == image.activeSwatch, sizes:true}" >\n    Sizes:\n    <p data-ng-repeat="size in color.sizes">\n        {{size.displayName}}\n    </p>\n</div>';
 },{}],5:[function(require,module,exports){
 'use strict';
 
