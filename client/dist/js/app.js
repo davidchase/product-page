@@ -98,6 +98,7 @@ module.exports = ['$scope', 'productService', 'imageUrl', 'swatchUrl',
             this.image.activeSwatch = index;
         };
 
+        $scope.product = this;
     }
 ];
 },{}],8:[function(require,module,exports){
