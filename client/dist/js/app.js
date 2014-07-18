@@ -17,7 +17,7 @@ angular.module('product-details', [
     product.name,
     suggestions.name
 ]);
-},{"./product":2,"./suggestions":7,"angular":"iBmHg2"}],2:[function(require,module,exports){
+},{"./product":2,"./suggestions":9,"angular":"iBmHg2"}],2:[function(require,module,exports){
 'use strict';
 // Maybe symlink our modules to node_modules
 // in order to avoid relative hell like so ../../.. 
@@ -27,6 +27,7 @@ require('angular-sanitize/angular-sanitize');
 var productCtrl = require('./productCtrl');
 var productImages = require('./product-images-directive');
 var productService = require('./productService');
+var productOptions = require('./product-options-directive');
 var capitalizeFilter = require('../../common/filters/capitalizeFilter');
 
 module.exports = angular.module('product', ['ngSanitize'])
@@ -35,58 +36,71 @@ module.exports = angular.module('product', ['ngSanitize'])
     .filter('capitalize', capitalizeFilter)
     .controller('productCtrl', productCtrl)
     .directive('productImages', productImages)
+    .directive('productOptions', productOptions)
     .service('productService', productService);
-},{"../../common/filters/capitalizeFilter":8,"./product-images-directive":3,"./productCtrl":5,"./productService":6,"angular-sanitize/angular-sanitize":"Qb7U43"}],3:[function(require,module,exports){
+},{"../../common/filters/capitalizeFilter":10,"./product-images-directive":3,"./product-options-directive":5,"./productCtrl":7,"./productService":8,"angular-sanitize/angular-sanitize":"Qb7U43"}],3:[function(require,module,exports){
 'use strict';
-var productImages = require('./product-images.tpl.html');
-
+// is it better to use templateUrl with fragile relative path
+// or use a partial transform with browserfiy and
+// also "pre-compiling" the template
+// it should depend on the amount of writes done to the template
 module.exports = function() {
     return {
         scope: true,
         restrict: 'EA',
-        template: productImages,
-        controller: ['$scope',
-            function($scope) {
-                // Setup some defaults
-                $scope.image = {
-                    selectedColor: 'White',
-                    activeIndex: 0,
-                    colorIndex: 0,
-                    selectedSwatch: 0
-                };
-                $scope.changeThumbnail = function(index) {
-                    $scope.image.activeIndex = index;
-                };
-                $scope.changeColor = function(index) {
-                    $scope.image.selectedColor = this.color.displayName;
-                    $scope.image.colorIndex = index;
-                    $scope.image.selectedSwatch = index;
-                };
-            }
-        ],
+        template: require('./product-images.tpl.html')
     };
 };
 },{"./product-images.tpl.html":4}],4:[function(require,module,exports){
-module.exports = '<div class="main-product">\n    <img data-ng-src="{{imageUrl}}{{product.colors[image.colorIndex].id}}_{{product.colors[0].viewCode[image.activeIndex]}}" />\n</div>\n<ul class="thumbnails">\n    <li data-ng-repeat="color in product.colors">\n        <img\n        ng-click="changeThumbnail($index)"\n        class="image"\n        data-ng-src="{{imageUrl}}{{product.colors[image.colorIndex].id}}_{{color.viewCode[$index]}}?$detailthumb$"\n        />\n    </li>\n</ul>\n<p>\n    Color: {{image.selectedColor | capitalize}}\n</p>\n<!-- Product Swatches-->\n<div\n    class="swatches"\n    data-ng-repeat-start="color in product.colors">\n\n    <img\n    data-ng-click="changeColor($index)"\n    data-ng-src="{{swatchUrl}}{{color.id}}_s.png"\n    data-color-name="{{color.displayName}}" />\n    \n</div>\n<!-- Product Size-->\n<div \n    data-ng-repeat-end\n    data-ng-class="{selected: $index == image.selectedSwatch, sizes:true}" >\n    Sizes:\n    <p data-ng-repeat="size in color.sizes">\n        {{size.displayName}}\n    </p>\n</div>';
+module.exports = '<div class="main-product">\n    <img data-ng-src="{{product.imageUrl}}{{data.colors[product.image.colorIndex].id}}_{{data.colors[0].viewCode[product.image.activeIndex]}}" />\n</div>\n<ul class="thumbnails">\n    <li data-ng-repeat="color in data.colors">\n        <img\n        ng-click="product.changeThumbnail($index)"\n        class="image"\n        data-ng-src="{{product.imageUrl}}{{data.colors[product.image.colorIndex].id}}_{{color.viewCode[$index]}}?$detailthumb$"\n        />\n    </li>\n</ul>\n';
 },{}],5:[function(require,module,exports){
+'use strict';
+module.exports = function() {
+    return {
+        scope: false,
+        restrict: 'EA',
+        template: require('./product-options.tpl.html')
+    };
+};
+},{"./product-options.tpl.html":6}],6:[function(require,module,exports){
+module.exports = '<div class="product-options">\n    <p class="selected-swatch">\n        Color: {{product.image.selectedColor | capitalize}}\n    </p>\n    <!-- Product Swatches-->\n    <div class="swatches">\n        <img\n        data-ng-class="{selected: $index == product.image.activeSwatch}"\n        data-ng-repeat="color in data.colors"\n        data-ng-click="product.changeColor($index, color)"\n        data-ng-src="{{product.swatchUrl}}{{color.id}}_s.png"\n        data-color-name="{{color.displayName}}" />\n    </div>\n    <!-- Product Size-->\n    <div class="product-size">\n        <div \n            data-ng-repeat="color in data.colors"\n            class="sizes"\n            data-ng-class="{selected: $index == product.image.activeSwatch}" >\n            <p>Sizes:</p>\n            <p data-ng-repeat="size in color.sizes">\n                {{size.displayName}}\n            </p>\n        </div>\n    </div>\n</div>';
+},{}],7:[function(require,module,exports){
 'use strict';
 
 module.exports = ['$scope', 'productService', 'imageUrl', 'swatchUrl',
     function($scope, productService, imageUrl, swatchUrl) {
-        $scope.imageUrl = imageUrl;
-        $scope.swatchUrl = swatchUrl;
         productService
             .getProduct()
             .then(function(data) {
-                $scope.product = data.product;
+                $scope.data = data.product;
             })
             .catch(function(err) {
                 throw new Error(err.status + ' ' + err.data);
             });
 
+        // Product Images + Options
+        this.imageUrl = imageUrl;
+        this.swatchUrl = swatchUrl;
+
+        this.image = {
+            selectedColor: 'White',
+            activeIndex: 0,
+            colorIndex: 0,
+            activeSwatch: 0
+        };
+
+        this.changeThumbnail = function(index) {
+            this.image.activeIndex = index;
+        };
+        this.changeColor = function(index, color) {
+            this.image.selectedColor = color.displayName;
+            this.image.colorIndex = index;
+            this.image.activeSwatch = index;
+        };
+
     }
 ];
-},{}],6:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 'use strict';
 
 /*
@@ -108,11 +122,11 @@ module.exports = ['$http', '$q',
         };
     }
 ];
-},{}],7:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 'use strict';
 
 module.exports = angular.module('suggestions', []);
-},{}],8:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 'use strict';
 
 module.exports = function() {

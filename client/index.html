@@ -10,14 +10,22 @@
         <!-- <link rel="stylesheet" href="css/style.css"> -->
     </head>
     <body>
-        <div data-ng-app="product-details">
+        <div data-ng-app="product-details" class="product-details">
             <div data-ng-controller="productCtrl as product">
-                <h2 data-ng-bind="product.displayName">Product Name</h2>
-                <h4>Details &amp; Shopping</h4>
-                <p data-ng-bind-html="product.longDescription">Product Description</p>
+                <h2 data-ng-bind="data.displayName">
+                    Product Name
+                </h2>
                 <div class="product-images" data-product-images></div>
+                <div class="product-content">
+                    <h4>
+                        Details &amp; Shopping
+                    </h4>
+                    <div class="product-desc" data-ng-bind-html="data.longDescription">
+                        Product Description
+                    </div>
+                    <div class="product-options" data-product-options></div>
+                </div>
             </div>
-            <div data-color-swatch></div>
         </div>
         <script src="dist/js/vendor-bundle.js"></script>
         <script src="dist/js/app.js"></script>

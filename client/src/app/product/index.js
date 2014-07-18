@@ -7,6 +7,7 @@ require('angular-sanitize/angular-sanitize');
 var productCtrl = require('./productCtrl');
 var productImages = require('./product-images-directive');
 var productService = require('./productService');
+var productOptions = require('./product-options-directive');
 var capitalizeFilter = require('../../common/filters/capitalizeFilter');
 
 module.exports = angular.module('product', ['ngSanitize'])
@@ -15,4 +16,5 @@ module.exports = angular.module('product', ['ngSanitize'])
     .filter('capitalize', capitalizeFilter)
     .controller('productCtrl', productCtrl)
     .directive('productImages', productImages)
+    .directive('productOptions', productOptions)
     .service('productService', productService);

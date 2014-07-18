@@ -1,35 +1,12 @@
 <div class="main-product">
-    <img data-ng-src="{{imageUrl}}{{product.colors[image.colorIndex].id}}_{{product.colors[0].viewCode[image.activeIndex]}}" />
+    <img data-ng-src="{{product.imageUrl}}{{data.colors[product.image.colorIndex].id}}_{{data.colors[0].viewCode[product.image.activeIndex]}}" />
 </div>
 <ul class="thumbnails">
-    <li data-ng-repeat="color in product.colors">
+    <li data-ng-repeat="color in data.colors">
         <img
-        ng-click="changeThumbnail($index)"
+        ng-click="product.changeThumbnail($index)"
         class="image"
-        data-ng-src="{{imageUrl}}{{product.colors[image.colorIndex].id}}_{{color.viewCode[$index]}}?$detailthumb$"
+        data-ng-src="{{product.imageUrl}}{{data.colors[product.image.colorIndex].id}}_{{color.viewCode[$index]}}?$detailthumb$"
         />
     </li>
 </ul>
-<p>
-    Color: {{image.selectedColor | capitalize}}
-</p>
-<!-- Product Swatches-->
-<div
-    class="swatches"
-    data-ng-repeat-start="color in product.colors">
-
-    <img
-    data-ng-click="changeColor($index)"
-    data-ng-src="{{swatchUrl}}{{color.id}}_s.png"
-    data-color-name="{{color.displayName}}" />
-    
-</div>
-<!-- Product Size-->
-<div 
-    data-ng-repeat-end
-    data-ng-class="{selected: $index == image.selectedSwatch, sizes:true}" >
-    Sizes:
-    <p data-ng-repeat="size in color.sizes">
-        {{size.displayName}}
-    </p>
-</div>

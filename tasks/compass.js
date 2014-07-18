@@ -17,5 +17,5 @@ gulp.task('compass', function() {
 // Watch task to covert scss to css 
 // on file change or modify
 gulp.task('watch-compass', function() {
-    gulp.watch(['dev/scss/**'], ['compass']);
+    gulp.watch(['./client/src/scss/**'], ['compass']);
 });
