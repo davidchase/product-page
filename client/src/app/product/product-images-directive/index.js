@@ -1,7 +1,6 @@
 'use strict';
-
-
 var productImages = require('./product-images.tpl.html');
+
 module.exports = function() {
     return {
         scope: true,
@@ -9,11 +8,12 @@ module.exports = function() {
         template: productImages,
         controller: ['$scope',
             function($scope) {
+                // Setup some defaults
                 $scope.image = {
                     selectedColor: 'White',
                     activeIndex: 0,
                     colorIndex: 0,
-                    activeSwatch: 0
+                    selectedSwatch: 0
                 };
                 $scope.changeThumbnail = function(index) {
                     $scope.image.activeIndex = index;
@@ -21,7 +21,7 @@ module.exports = function() {
                 $scope.changeColor = function(index) {
                     $scope.image.selectedColor = this.color.displayName;
                     $scope.image.colorIndex = index;
-                    $scope.image.activeSwatch = index;
+                    $scope.image.selectedSwatch = index;
                 };
             }
         ],

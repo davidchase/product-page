@@ -27,7 +27,7 @@
 <!-- Product Size-->
 <div 
     data-ng-repeat-end
-    data-ng-class="{selected: $index == image.activeSwatch, sizes:true}" >
+    data-ng-class="{selected: $index == image.selectedSwatch, sizes:true}" >
     Sizes:
     <p data-ng-repeat="size in color.sizes">
         {{size.displayName}}
