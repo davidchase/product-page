@@ -1,7 +1,4 @@
 'use strict';
-
-require('../client/src/app');
-
 var $scope, product;
 
 setup(angular.mock.module('product'));
