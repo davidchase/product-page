@@ -10,15 +10,15 @@ test('productService should have getProduct method', inject(function(productServ
 }));
 
 
-var httpBackend;
 setup(inject(function($httpBackend) {
-    httpBackend = $httpBackend;
-    httpBackend.when("GET", "/api/product").respond({
-        productId: "31592843"
-    });
+    $httpBackend
+        .when("GET", "/api/product")
+        .respond({
+            productId: "31592843"
+        });
 }));
 
-test('should GET product', function() {
-    httpBackend.expectGET('/api/product');
-    httpBackend.flush();
-});
+test('should GET product', inject(function($httpBackend) {
+    $httpBackend.expectGET('/api/product');
+    $httpBackend.flush();
+}));

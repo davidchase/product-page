@@ -6,7 +6,7 @@ setup(angular.mock.module('product'));
 setup(inject(function($rootScope, $controller) {
     $scope = $rootScope.$new();
     $controller('productCtrl', {
-        $scope: $scope
+        $scope: $scope,
     });
     product = $scope.product;
 }));
@@ -40,3 +40,17 @@ test('swatch should display correct label', function() {
     product.image.colorIndex.should.equal(2);
     product.image.selectedColor.should.equal('white');
 });
+
+
+test('product service getProduct method works',
+    inject(function(productService, $httpBackend) {
+        productService
+            .getProduct()
+            .then(function(data) {
+                data.should.be.type('object');
+                data.should.eql({
+                    productId: '31592843'
+                });
+            });
+        $httpBackend.flush();
+    }));
