@@ -45,3 +45,6 @@ Current Structure
     └── routes
         ├── api.js
         └── index.js
+
+Tech Stack
+----------
