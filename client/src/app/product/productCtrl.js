@@ -31,6 +31,8 @@ module.exports = ['$scope', 'productService', 'imageUrl', 'swatchUrl',
             this.image.activeSwatch = index;
         };
 
+        // testing
         $scope.product = this;
+
     }
 ];

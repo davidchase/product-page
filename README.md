@@ -19,15 +19,14 @@ Current Structure
     └── src
         ├── app
         │   ├── index.js
-        │   ├── npm-debug.log
         │   ├── product
-        │   │   ├── color-swatch-directive
-        │   │   │   ├── color-swatch.tpl.html
-        │   │   │   └── index.js
         │   │   ├── index.js
         │   │   ├── product-images-directive
         │   │   │   ├── index.js
         │   │   │   └── product-images.tpl.html
+        │   │   ├── product-options-directive
+        │   │   │   ├── index.js
+        │   │   │   └── product-options.tpl.html
         │   │   ├── productCtrl.js
         │   │   └── productService.js
         │   └── suggestions
@@ -48,3 +47,11 @@ Current Structure
 
 Tech Stack
 ----------
+* Browserify
+* Express v4
+* Gulp
+* Angular*
+* Karma Test Runner
+* Mocha Test Suite
+
+<sub>*Current setup for front-end, may change...</sub>
