@@ -1,7 +1,8 @@
 product-page
 ============
 
-[![Build Status](https://travis-ci.org/davidchase/product-page.svg)](https://travis-ci.org/davidchase/product-page)
+[![Build Status][travis-image]][travis-url]
+[![devDependency Status][devdeps-image]][devdeps-url]
 
 Angular based product-page
 
@@ -55,3 +56,7 @@ Tech Stack
 * Mocha Test Suite
 
 <sub>*Current setup for front-end, may change...</sub>
+[travis-image]: http://img.shields.io/travis/davidchase/product-page.svg?style=flat
+[travis-url]: https://travis-ci.org/davidchase/product-page
+[devdeps-image]: http://img.shields.io/david/dev/davidchase/product-page.svg?style=flat
+[devdeps-url]:https://david-dm.org/davidchase/product-page#info=devDependencies
