@@ -1,0 +1,30 @@
+{
+    "nonew": true,
+    "jquery": false,
+    "curly": true,
+    "noarg": true,
+    "forin": true,
+    "noempty": true,
+    "phantom": true,
+    "node": true,
+    "eqeqeq": true,
+    "strict": true,
+    "undef": true,
+    "newcap": true,
+    "immed": true,
+    "browser": true,
+    "freeze": true,
+    "multistr": true,
+    "unused": true,
+    "globals": {
+        "angular": true
+    },
+    "predef": [
+        "should",
+        "suite",
+        "test",
+        "setup",
+        "inject",
+        "teardown"
+    ]
+}

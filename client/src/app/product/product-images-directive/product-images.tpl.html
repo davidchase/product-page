@@ -1,0 +1,12 @@
+<div class="main-product">
+    <img data-ng-src="{{product.imageUrl}}{{data.colors[product.image.colorIndex].id}}_{{data.colors[0].viewCode[product.image.activeIndex]}}" />
+</div>
+<ul class="thumbnails">
+    <li data-ng-repeat="color in data.colors">
+        <img
+        ng-click="product.changeThumbnail($index)"
+        class="image"
+        data-ng-src="{{product.imageUrl}}{{data.colors[product.image.colorIndex].id}}_{{color.viewCode[$index]}}?$detailthumb$"
+        />
+    </li>
+</ul>

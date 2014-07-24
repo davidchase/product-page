@@ -1,0 +1,61 @@
+{
+  "name": "product-page",
+  "version": "0.0.1",
+  "description": "Angular driven product page",
+  "main": "app.js",
+  "scripts": {
+    "install": "napa",
+    "test": "./node_modules/karma/bin/karma start --single-run --browsers PhantomJS",
+    "start": "node server.js"
+  },
+  "napa": {
+    "angularjs": "angular/bower-angular",
+    "angular-sanitize": "angular/bower-angular-sanitize"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/davidchase/product-page.git"
+  },
+  "keywords": [
+    "product-page",
+    "freepeople"
+  ],
+  "author": "David Annopolsky <dannopolsky@freepeople.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/davidchase/product-page/issues"
+  },
+  "homepage": "https://github.com/davidchase/product-page",
+  "devDependencies": {
+    "angular": "^1.2.19",
+    "angular-mocks": "^1.2.19",
+    "body-parser": "^1.4.3",
+    "browserify": "^4.2.0",
+    "errorhandler": "^1.1.1",
+    "express": "^4.6.1",
+    "gulp": "^3.8.6",
+    "gulp-compass": "^1.1.9",
+    "gulp-jshint": "^1.7.1",
+    "gulp-uglify": "^0.3.1",
+    "gulp-util": "^2.2.20",
+    "jshint-stylish": "^0.4.0",
+    "karma": "^0.12.17",
+    "karma-browserify": "^0.2.1",
+    "karma-chrome-launcher": "^0.1.4",
+    "karma-coverage": "^0.2.4",
+    "karma-mocha": "^0.1.4",
+    "karma-mocha-reporter": "^0.2.8",
+    "karma-phantomjs-launcher": "^0.1.4",
+    "lodash-node": "^2.4.1",
+    "mocha": "^1.20.1",
+    "morgan": "^1.1.1",
+    "napa": "^0.4.1",
+    "partialify": "^3.1.1",
+    "should": "^4.0.4",
+    "tap-spec": "^0.2.0",
+    "vinyl-buffer": "0.0.0",
+    "vinyl-source-stream": "^0.1.1",
+    "vm-browserify": "0.0.4",
+    "watchify": "^0.10.2"
+  }
+}
