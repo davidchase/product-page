@@ -18,38 +18,35 @@ Current Structure
     │       └── vendor-bundle.js
     ├── index.html
     └── src
-        ├── app
-        │   ├── index.js
-        │   ├── product
-        │   │   ├── index.js
-        │   │   ├── product-images-directive
-        │   │   │   ├── index.js
-        │   │   │   └── product-images.tpl.html
-        │   │   ├── product-options-directive
-        │   │   │   ├── index.js
-        │   │   │   └── product-options.tpl.html
-        │   │   ├── productCtrl.js
-        │   │   └── productService.js
-        │   └── suggestions
-        │       └── index.js
-        ├── common
-        │   ├── directives
-        │   ├── filters
-        │   │   └── capitalizeFilter.js
-        │   └── services
-        └── scss
-            └── style.scss
+       ├── app
+       │   ├── index.js
+       │   ├── product
+       │   │   ├── index.js
+       │   │   ├── product-images-directive
+       │   │   │   ├── index.js
+       │   │   │   └── product-images.tpl.html
+       │   │   ├── product-options-directive
+       │   │   │   ├── index.js
+       │   │   │   └── product-options.tpl.html
+       │   │   ├── productCtrl.js
+       │   │   └── productService.js
+       │   └── suggestions
+       │       └── index.js
+       ├── common
+       │   ├── directives
+       │   ├── filters
+       │   │   └── capitalizeFilter.js
+       │   └── services
+       └── scss
+           └── style.scss
 
     server
     ├── fixtures.json
-    └── routes
-        ├── api.js
-        └── index.js
 
 Tech Stack
 ----------
 * Browserify
-* Express v4
+* ~~Express v4~~ Hapi v6.4.0
 * Gulp
 * Angular*
 * Karma Test Runner

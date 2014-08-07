@@ -1,29 +1,44 @@
+#!/usr/bin/env node
+
 'use strict';
-// Express v4
-var express = require('express');
-var bodyParser = require('body-parser');
-var errorhandler = require('errorhandler');
-var morgan = require('morgan');
-var app = module.exports = express();
-var env = process.env.NODE_ENV || 'development';
-var routes = require('./server/routes');
-var api = require('./server/routes/api');
+// Hapi v6.4.0
+var Hapi = require('hapi');
+var Good = require('good');
+var server = new Hapi.Server('localhost', 3000);
 
-// Config
-if (env === 'development') {
-    app.use(errorhandler());
-}
-app.use('/api/product', bodyParser.json());
-app.use(express.static(__dirname + '/client'));
-app.use(morgan('dev'));
+// Product Page + API + static files
+server.route([{
+    method: 'GET',
+    path: '/',
+    handler: function(req, reply) {
+        reply.file('./client/index.html');
+    }
+}, {
+    method: 'GET',
+    path: '/api/product',
+    handler: {
+        file: './server/fixtures.json'
+    }
+}, {
+    method: 'GET',
+    path: '/{path*}',
+    handler: {
+        directory: {
+            path: './client/',
+            index: true
+        }
+    }
+}]);
 
-// Routes
-app.get('/', routes.index);
+// Pack for logs
+server.pack.register(Good, function(err) {
+    if (err) {
+        throw err;
+    }
 
-// JSON Data
-app.get('/api/product', api.product);
-
-// Start Server 
-app.listen(3000, function() {
-    console.log("Express server listening on port %d", this.address().port);
+    server.start(function() {
+        server.log('info', 'Server running at: ' + server.info.uri);
+    });
 });
+
+server.start();
