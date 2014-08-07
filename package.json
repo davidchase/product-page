@@ -30,20 +30,20 @@
     "angular": "^1.2.19",
     "angular-mocks": "^1.2.19",
     "body-parser": "^1.4.3",
-    "browserify": "^4.2.0",
+    "browserify": "^5.9.1",
     "errorhandler": "^1.1.1",
     "express": "^4.6.1",
     "gulp": "^3.8.6",
     "gulp-compass": "^1.1.9",
     "gulp-jshint": "^1.7.1",
     "gulp-uglify": "^0.3.1",
-    "gulp-util": "^2.2.20",
+    "gulp-util": "^3.0.0",
     "jshint-stylish": "^0.4.0",
-    "karma": "^0.12.17",
+    "karma": "^0.12.21",
     "karma-browserify": "^0.2.1",
     "karma-chrome-launcher": "^0.1.4",
     "karma-coverage": "^0.2.4",
-    "karma-mocha": "^0.1.4",
+    "karma-mocha": "^0.1.6",
     "karma-mocha-reporter": "^0.2.8",
     "karma-phantomjs-launcher": "^0.1.4",
     "lodash-node": "^2.4.1",
@@ -56,6 +56,6 @@
     "vinyl-buffer": "0.0.0",
     "vinyl-source-stream": "^0.1.1",
     "vm-browserify": "0.0.4",
-    "watchify": "^0.10.2"
+    "watchify": "^1.0.1"
   }
 }
