@@ -36,14 +36,11 @@ module.exports = function(config) {
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
-            'test/*.js': ['browserify'],
-            'client/src/**/*.js': ['coverage']
+            'test/*.js': ['browserify', 'coverage'],
         },
 
         coverageReporter: {
-            type: 'text-summary',
-            dir: 'coverage/',
-            file: 'coverage.txt'
+            type: 'text-summary'
         },
 
         browserify: {
