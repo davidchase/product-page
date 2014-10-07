@@ -1,6 +1,5 @@
 'use strict';
-var jshint = require('gulp-jshint');
-var stylish = require('jshint-stylish');
+var eslint = require('gulp-eslint');
 var gulp = require('gulp');
 
 gulp.task('lint', function() {
@@ -10,7 +9,6 @@ gulp.task('lint', function() {
             '/client/src/**/*.js',
             'test/**/*.js'
         ])
-        .pipe(jshint())
-        .pipe(jshint.reporter(stylish))
-        .pipe(jshint.reporter('fail'));
+        .pipe(eslint())
+        .pipe(eslint.format('stylish', process.stdout));
 });

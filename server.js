@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 'use strict';
-// Hapi v6.4.0
+// Hapi v6.11.1
 var Hapi = require('hapi');
 var Good = require('good');
 var server = new Hapi.Server('localhost', 3000);
