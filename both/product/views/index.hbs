@@ -1,0 +1,46 @@
+<div class="product-images" data-product-images>
+    <div class="main-product">
+        <img src="{{url}}{{product.colors.[0].id}}_{{product.colors.[0].viewCode.[0]}}" />
+    </div>
+    <ul class="thumbnails">
+        {{#each product.colors}}
+        <li>
+            <img
+            class="image"
+            data-view-code="{{lookup viewCode @index}}"
+            src="{{../url}}{{../product.colors.[0].id}}_{{lookup viewCode @index}}?$detailthumb$" />
+        </li>
+        {{/each}}
+    </ul>
+</div>
+<div class="product-content">
+    <h4>
+    Details &amp; Shopping
+    </h4>
+    <div class="product-desc">
+        <p>{{{product.longDescription}}}</p>
+    </div>
+    <div class="product-options" data-product-options>
+        <p class="selected-swatch">
+        Color: {{defaultColor}}
+        </p>
+        <div class="swatches">
+            {{#each product.colors}}
+            <img
+            src="{{../swatchUrl}}{{id}}_s.png"
+            data-color-code="{{colorCode}}"
+            data-color-name="{{displayName}}" />
+            {{/each}}
+        </div>
+    </div>
+    <div class="product-size">
+        {{#each product.colors}}
+            {{#each sizes}}
+            <div class="sizes">
+                <p>Sizes:</p>
+                <p>{{displayName}}</p>
+            </div>
+            {{/each}}
+        {{/each}}
+    </div>
+</div>

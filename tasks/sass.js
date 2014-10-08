@@ -4,14 +4,11 @@ var sass = require('gulp-sass');
 var bourbon = require('node-bourbon');
 
 gulp.task('sass', function() {
-    return gulp.src('./src/scss/**/*.scss')
+    return gulp.src('./client/src/scss/**/*.scss')
         .pipe(sass({
-            includePaths: bourbon.with(
-                './src/bower_components/foundation5-sass/scss',
-                './src/scripts/modules',
-                './src/scss'
-            ),
+            includePaths: bourbon.with('./client/src/scss'),
+            outputStyle: 'compressed',
             errLogToConsole: true
         }))
-        .pipe(gulp.dest('./public/css'));
+        .pipe(gulp.dest('./client/dist/css'));
 });

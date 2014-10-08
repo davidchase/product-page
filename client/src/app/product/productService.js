@@ -1,21 +1,18 @@
 'use strict';
 
-/*
- * Data driven in from express layer
- * $http returns a promise to the controller
- * $q rejects any errors
- *
- */
-module.exports = ['$http', '$q',
-    function($http, $q) {
-        this.getProduct = function() {
-            return $http.get('/api/product')
-                .then(function(res) {
-                    return typeof res.data === 'object' ? res.data : $q.reject('Not correct format');
-                })
-                .catch(function(err) {
-                    return $q.reject(err);
-                });
-        };
-    }
-];
+var ProductService = function() {
+    this.rest = require('rest');
+    this.mime = require('rest/interceptor/mime');
+    this.errorCode = require('rest/interceptor/errorCode');
+};
+
+var ProductProto = ProductService.prototype;
+
+ProductProto.getProducts = function() {
+var client = this.rest.wrap(this.mime).wrap(this.errorCode);
+    return client({
+        path: 'http://localhost:9000/api/product'
+    });
+};
+
+module.exports = new ProductService();

@@ -11,16 +11,7 @@ gulp.task('watchify', function() {
     var bundleStream = watchify(index);
     var firstTime = true;
 
-    // First time run
-    // needs to externals
-    // may need to revisit this concept later
-    if (firstTime) {
-        bundleStream.external(libs);
-        rebundle();
-        firstTime = false;
-    }
-
-    function rebundle() {
+    var rebundle = function() {
         bundleStream
             .transform(html)
             .bundle()
@@ -30,6 +21,15 @@ gulp.task('watchify', function() {
                 console.log(err);
             });
 
+    };
+
+    // First time run
+    // needs to externals
+    // may need to revisit this concept later
+    if (firstTime) {
+        bundleStream.external(libs);
+        rebundle();
+        firstTime = false;
     }
 
     bundleStream.on('update', rebundle);
