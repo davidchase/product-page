@@ -27,20 +27,21 @@
         <div class="swatches">
             {{#each product.colors}}
             <img
+            class="{{#if @first}}selected{{/if}}"
             src="{{../swatchUrl}}{{id}}_s.png"
             data-color-code="{{colorCode}}"
             data-color-name="{{displayName}}" />
             {{/each}}
         </div>
-    </div>
-    <div class="product-size">
-        {{#each product.colors}}
-            {{#each sizes}}
+        <div class="product-size">
+            {{#each product.colors}}
             <div class="sizes">
                 <p>Sizes:</p>
+                {{#each sizes}}
                 <p>{{displayName}}</p>
+                {{/each}}
             </div>
             {{/each}}
-        {{/each}}
+        </div>
     </div>
 </div>
