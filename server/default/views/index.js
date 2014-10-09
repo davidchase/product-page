@@ -12,14 +12,14 @@ module.exports = [{
             .getProducts()
             .then(function(response) {
                 reply.view('./product/views/index', {
-                    defaultColor: 'White',
+                    defaultColor: 'Black Multi',
                     product: response.entity.product,
                     url: 'http://images.urbanoutfitters.com/is/image/UrbanOutfitters/',
                     swatchUrl: 'http://www.urbanoutfitters.com/images/swatches/'
                 });
             })
             .otherwise(function(err) {
-                throw new Error(err);
+                console.error(err);
             });
     }
 }, {
