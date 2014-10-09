@@ -25,3 +25,10 @@ gulp.task('browserify', function() {
             console.log(err);
         });
 });
+
+gulp.task('browserify-watch', function(){
+    var watcher = gulp.watch('./client/src/app/**/*.js', ['browserify']);
+    watcher.on('change', function(event){
+       return console.log('File ' + event.path + ' was ' + event.type + ', running browserify...');
+    });
+});

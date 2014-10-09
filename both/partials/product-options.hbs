@@ -1,0 +1,23 @@
+<div class="product-options">
+    <p class="selected-swatch">
+    Color: {{defaultColor}}
+    </p>
+    <div class="swatches">
+        {{#each product.colors}}
+        <img
+        class="{{#if @first}}selected{{/if}}"
+        src="{{../swatchUrl}}{{id}}_s.png"
+        data-color-code="{{colorCode}}"
+        data-color-name="{{displayName}}" />
+        {{/each}}
+    </div>
+    <p>Sizes:</p>
+    <div class="product-size">
+        {{#each product.skusInfo}}
+        <div class="sizes hidden" data-color-code={{colorId}}>
+            <button {{#unless stockLevel}}disabled{{/unless}}>{{size}}</button>
+        </div>
+        {{/each}}
+        
+    </div>
+</div>

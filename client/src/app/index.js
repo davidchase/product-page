@@ -1,18 +1,35 @@
 'use strict';
 
-/*  
- *  Can be done with
- *  require('angularjs/angular');
- *  which exposes angular to the window.
- *  This is a current stable build from
- *  angular hosted as a bower package.
- *
- */
-var angular = require('angular');
-var product = require('./product');
-var suggestions = require('./suggestions');
+var setupSizesBySwatch = function() {
+    var selectedSwatch = document.querySelector('.selected');
+    var swatchColorCode = selectedSwatch.getAttribute('data-color-code');
+    var productSizes = document.querySelector('.product-size');
+    var sizes = productSizes.children;
+    var idx = 0;
+    var sizesLength = sizes.length;
 
-angular.module('product-details', [
-    product.name,
-    suggestions.name
-]);
+    for (idx; idx < sizesLength; idx++) {
+        if (sizes[idx].getAttribute('data-color-code') === swatchColorCode) {
+            sizes[idx].classList.remove('hidden');
+        } else {
+            sizes[idx].classList.add('hidden');
+        }
+    }
+};
+var changeCurrentSwatch = function() {
+    var swatches = document.querySelector('.swatches');
+    var swatchesArray = Array.prototype.slice.call(swatches.children);
+    swatches.addEventListener('click', function(e) {
+        if (e.target.tagName !== 'IMG') {
+            return;
+        }
+        swatchesArray.map(function(swatch){
+            return swatch.classList.remove('selected');
+        });
+        e.target.classList.add('selected');
+        setupSizesBySwatch();
+    });
+};
+
+setupSizesBySwatch();
+changeCurrentSwatch();

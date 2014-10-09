@@ -9,7 +9,7 @@ var ProductService = function() {
 var ProductProto = ProductService.prototype;
 
 ProductProto.getProducts = function() {
-var client = this.rest.wrap(this.mime).wrap(this.errorCode);
+    var client = this.rest.wrap(this.mime).wrap(this.errorCode);
     return client({
         path: 'http://localhost:9000/api/product'
     });

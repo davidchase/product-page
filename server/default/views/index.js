@@ -1,13 +1,7 @@
 'use strict';
-
+// needs to be relocated
+// ... relative hell is no bueno
 var productService = require('../../../client/src/app/product/productService');
-// Need to find a place for the helpers
-// maybe will remove helpers in general
-// but for now its here....
-var Handlebars = require('handlebars');
-Handlebars.registerHelper('lookup', function(obj, field) {
-  return obj[field];
-});
 
 module.exports = [{
     // index

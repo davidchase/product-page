@@ -1,18 +1,4 @@
-<div class="product-images" data-product-images>
-    <div class="main-product">
-        <img src="{{url}}{{product.colors.[0].id}}_{{product.colors.[0].viewCode.[0]}}" />
-    </div>
-    <ul class="thumbnails">
-        {{#each product.colors}}
-        <li>
-            <img
-            class="image"
-            data-view-code="{{lookup viewCode @index}}"
-            src="{{../url}}{{../product.colors.[0].id}}_{{lookup viewCode @index}}?$detailthumb$" />
-        </li>
-        {{/each}}
-    </ul>
-</div>
+{{> product-images}}
 <div class="product-content">
     <h4>
     Details &amp; Shopping
@@ -20,28 +6,7 @@
     <div class="product-desc">
         <p>{{{product.longDescription}}}</p>
     </div>
-    <div class="product-options" data-product-options>
-        <p class="selected-swatch">
-        Color: {{defaultColor}}
-        </p>
-        <div class="swatches">
-            {{#each product.colors}}
-            <img
-            class="{{#if @first}}selected{{/if}}"
-            src="{{../swatchUrl}}{{id}}_s.png"
-            data-color-code="{{colorCode}}"
-            data-color-name="{{displayName}}" />
-            {{/each}}
-        </div>
-        <div class="product-size">
-            {{#each product.colors}}
-            <div class="sizes">
-                <p>Sizes:</p>
-                {{#each sizes}}
-                <p>{{displayName}}</p>
-                {{/each}}
-            </div>
-            {{/each}}
-        </div>
-    </div>
+    <h4>${{product.skusInfo.[0].priceLists.[0].salePrice}}</h4>
+    <p>was ${{product.skusInfo.[0].priceLists.[0].listPrice}}.00</p>
+    {{> product-options}}
 </div>

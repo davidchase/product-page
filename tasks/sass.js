@@ -12,3 +12,11 @@ gulp.task('sass', function() {
         }))
         .pipe(gulp.dest('./client/dist/css'));
 });
+
+// simple watcher for libsass :)
+gulp.task('sass-watch', function() {
+    var watcher = gulp.watch('./client/src/scss/**/*.scss', ['sass']);
+    return watcher.on('change', function(event) {
+        console.log('File ' + event.path + ' was ' + event.type + ', running sass compile...');
+    });
+});

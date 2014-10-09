@@ -23,6 +23,8 @@ module.exports = {
             },
             path: './both/',
             layoutPath: './both/common/',
+            helpersPath: './both/helpers',
+            partialsPath: './both/partials',
             layout: true,
             isCached: true
         }
