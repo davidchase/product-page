@@ -1,7 +1,35 @@
-// Placeholder
+// foundation
+@import "normalize";
+@import "foundation/components/grid";
+@import "foundation/components/visibility";
 
-li {
-    display: inline;
+input {
+    width:100%;
+}
+
+input.product--quantity {
+    padding: 4px 6px;
+    width: 3em;
+    border: 1px solid #bdbdbd;
+    border-radius: 2px;
+    color: #3d3d3d;
+    font-family: Helvetica,Arial,sans-serif;
+    text-align: center;
+    margin: 5px 1px;
+    background-image: none;
+    font-size:12px;
+}
+
+button.product--button {
+    background: #fff;
+    border: 1px solid;
+    margin: 4px 0;
+    display: block;
+}
+
+.thumbnails--thumbs {
+    margin: 7px 0;
+    display: inline-block;
 }
 
 .color-swatch {
@@ -9,20 +37,25 @@ li {
 }
 
 .sizes {
-    float: left;
     position: relative;
     button {
         border: 1px solid;
         background: transparent;
         margin: 0 4px 0 0;
         cursor: pointer;
+        min-width: 4em;
+        float: left;
+        padding: 0;
+        font-size: 0.4em;
+        display: block;
+        line-height: 3em;
     }
     button[disabled] {
         cursor: default;
         color: #ddd;
         border: 1px solid #ddd;
     }
-    &:hover .show-on-hover {
+    &:hover .out-of-stock {
         display: block;
     }
 }
@@ -31,16 +64,23 @@ li {
     text-transform: capitalize;
 }
 
-.show-on-hover {
+.out-of-stock {
     position: absolute;
-    width: 6em;
+    min-width: 10em;
     font-size: 0.8em;
     color: red;
     display: none;
-    bottom: 32px;
+    bottom: 33px;
     background: #fff;
-    padding: 15px 7px 15px 15px;
+    padding: 8px;
     border: 1px solid;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.running-low {
+    position: absolute;
+    display: none;
 }
 
 .swatches {
@@ -71,30 +111,10 @@ li {
     }
 }
 
-.product-details {
-    margin: 0 auto;
-    width: 1140px;
-    padding: 20px;
-}
 
-.product-content {
-    float: left;
-    width: 68%;
-    margin: 0 3em;
-}
 
-.product-images {
-    float: left;
-}
-
-.product-desc {
-    float: left;
-    width: 60%;
-    padding: 0px 30px 0px 0px;
-}
 
 .product-options {
-    float: left;
     margin: 20px 0;
 }
 
@@ -106,21 +126,7 @@ li {
     display: none;
 }
 
-h1 {
-    font-size: 2em;
-    margin: 0.67em 0;
-}
-
 h2 {
-    font-size: 1.5em;
-    margin: 0.75em 0;
-}
-
-h3 {
-    font-size: 1.17em;
-    margin: 0.83em 0;
-}
-
-h4 {
-    margin: 1.12em 0;
+    margin: 0.6em 1em;
+    font-weight: bold;
 }

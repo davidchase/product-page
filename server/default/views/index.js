@@ -11,11 +11,13 @@ module.exports = [{
         productService
             .getProducts()
             .then(function(response) {
+                var thumbnails = response.entity.product.colors[0].viewCode;
                 reply.view('./product/views/index', {
                     defaultColor: 'Black Multi',
                     product: response.entity.product,
-                    url: 'http://images.urbanoutfitters.com/is/image/UrbanOutfitters/',
-                    swatchUrl: 'http://www.urbanoutfitters.com/images/swatches/'
+                    thumbnails: thumbnails,
+                    url: 'http://img5.fpassets.com/is/image/FreePeople/',
+                    swatchUrl: 'http://img2.fpassets.com/is/image/FreePeople/'
                 });
             })
             .otherwise(function(err) {

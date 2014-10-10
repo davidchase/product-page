@@ -1,4 +1,4 @@
-<div class="product-options">
+<div class="product-options small-8 large-8 columns">
     <p class="selected-swatch">
         Color: <span class="current-color">{{defaultColor}}</span>
     </p>
@@ -6,17 +6,18 @@
         {{#each product.colors}}
         <img
         class="{{#if @first}}selected{{/if}}"
-        src="{{../swatchUrl}}{{id}}_s.png"
+        src="{{../swatchUrl}}{{id}}_swatch?$swatch$"
         data-color-code="{{colorCode}}"
         data-color-name="{{displayName}}" />
         {{/each}}
     </div>
     <p>Sizes:</p>
-    <div class="product-size">
+    <div class="product-size clearfix">
         {{#each product.skusInfo}}
         <div class="sizes hidden" data-color-code={{colorId}}>
             <button {{#unless stockLevel}}disabled{{/unless}}>{{size}}</button>
-            {{#unless stockLevel}}<div class="show-on-hover">Out of stock</div>{{/unless}}
+            {{#unless stockLevel}}<div class="out-of-stock">Out of stock</div>{{/unless}}
+            {{#equal stockLevel 1}}<div class="running-low">Only {{stockLevel}} left </div>{{/equal}}
         </div>
         {{/each}}
         

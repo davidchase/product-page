@@ -6,7 +6,7 @@ var bourbon = require('node-bourbon');
 gulp.task('sass', function() {
     return gulp.src('./client/src/scss/**/*.scss')
         .pipe(sass({
-            includePaths: bourbon.with('./client/src/scss'),
+            includePaths: bourbon.with('./node_modules/foundation/scss', './client/src/scss'),
             outputStyle: 'compressed',
             errLogToConsole: true
         }))

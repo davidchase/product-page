@@ -1,5 +1,5 @@
 {{> product-images}}
-<div class="product-content">
+<div class="product-content small-8 large-8 columns">
     <h4>
     Details &amp; Shopping
     </h4>
@@ -8,5 +8,6 @@
     </div>
     <h4>${{product.skusInfo.[0].priceLists.[0].salePrice}}</h4>
     <p>was ${{product.skusInfo.[0].priceLists.[0].listPrice}}.00</p>
-    {{> product-options}}
 </div>
+{{> product-options}}
+{{> basket-options}}

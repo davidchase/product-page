@@ -16,12 +16,25 @@ var setupSizesBySwatch = function() {
         }
     }
 };
-var changeImages = function(e){
+
+
+var changeProductColors = function(e) {
     var colorCode = e.target.getAttribute('data-color-code');
     var primaryImage = document.querySelector('.primary-image');
     var primaryImageArray = primaryImage.src.split('_');
+    var thumbnails = document.querySelector('.thumbnails');
+    var thumbs = thumbnails.children;
+    var thumbsLength = thumbs.length;
+    var idx = 0;
+    var tmp;
     primaryImageArray[1] = colorCode;
     primaryImage.src = primaryImageArray.join('_');
+
+    for (idx; idx < thumbsLength; idx++) {
+        tmp = thumbs[idx].children[0].src.split('_');
+        tmp[1] = colorCode;
+        thumbs[idx].children[0].src = tmp.join('_');
+    }
 };
 
 var changeCurrentSwatch = function() {
@@ -33,13 +46,28 @@ var changeCurrentSwatch = function() {
         if (e.target.tagName !== 'IMG') {
             return;
         }
-        swatchesArray.map(function(swatch){
+        swatchesArray.map(function(swatch) {
             return swatch.classList.remove('selected');
         });
         e.target.classList.add('selected');
         currentColor.textContent = e.target.getAttribute('data-color-name').toLowerCase();
         setupSizesBySwatch();
-        changeImages(e);
+        changeProductColors(e);
+    });
+};
+
+
+var changeImages = function() {
+    var thumbnails = document.querySelector('.thumbnails');
+    var primaryImage = document.querySelector('.primary-image');
+    thumbnails.addEventListener('click', function(e) {
+        var dataCode = e.target.getAttribute('data-view-code');
+        var tempImage;
+        if (e.target.tagName !== 'IMG') {
+            return;
+        }
+        tempImage = primaryImage.src.slice(0, -1);
+        primaryImage.src = tempImage + dataCode;
     });
 };
 
@@ -47,3 +75,4 @@ var changeCurrentSwatch = function() {
 
 setupSizesBySwatch();
 changeCurrentSwatch();
+changeImages();
