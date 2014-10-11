@@ -1,6 +1,11 @@
 'use strict';
 
-var setupSizesBySwatch = function() {
+var SingleProductItem = function(){
+    this.queryElement = document.querySelector.bind(document);
+};
+var SPIProto = SingleProductItem.prototype;
+
+SPIProto.setupSizesBySwatch = function() {
     var selectedSwatch = document.querySelector('.selected');
     var swatchColorCode = selectedSwatch.getAttribute('data-color-code');
     var productSizes = document.querySelector('.product-size');
@@ -18,7 +23,7 @@ var setupSizesBySwatch = function() {
 };
 
 
-var changeProductColors = function(e) {
+SPIProto.changeProductColors = function(e) {
     var colorCode = e.target.getAttribute('data-color-code');
     var primaryImage = document.querySelector('.primary-image');
     var primaryImageArray = primaryImage.src.split('_');
@@ -37,7 +42,7 @@ var changeProductColors = function(e) {
     }
 };
 
-var changeCurrentSwatch = function() {
+SPIProto.changeCurrentSwatch = function() {
     var swatches = document.querySelector('.swatches');
     var swatchesArray = Array.prototype.slice.call(swatches.children);
     var currentColor = document.querySelector('.current-color');
@@ -57,7 +62,7 @@ var changeCurrentSwatch = function() {
 };
 
 
-var changeImages = function() {
+SPIProto.changeImages = function() {
     var thumbnails = document.querySelector('.thumbnails');
     var primaryImage = document.querySelector('.primary-image');
     thumbnails.addEventListener('click', function(e) {

@@ -3,8 +3,17 @@
 @import "foundation/components/grid";
 @import "foundation/components/visibility";
 
+body {
+    font-family: 'Lato', Helvetica, Arial, sans-serif;
+}
+
 input {
-    width:100%;
+    width: 100%;
+}
+
+.sale {
+    font-size: 0.8em;
+    color: #bf0000;
 }
 
 input.product--quantity {
@@ -13,11 +22,10 @@ input.product--quantity {
     border: 1px solid #bdbdbd;
     border-radius: 2px;
     color: #3d3d3d;
-    font-family: Helvetica,Arial,sans-serif;
     text-align: center;
     margin: 5px 1px;
     background-image: none;
-    font-size:12px;
+    font-size: 12px;
 }
 
 button.product--button {
@@ -68,7 +76,7 @@ button.product--button {
     position: absolute;
     min-width: 10em;
     font-size: 0.8em;
-    color: red;
+    color: #bf0000;
     display: none;
     bottom: 33px;
     background: #fff;
@@ -110,9 +118,6 @@ button.product--button {
         margin: 0 3px 0 0;
     }
 }
-
-
-
 
 .product-options {
     margin: 20px 0;
