@@ -11,6 +11,10 @@ input {
     width: 100%;
 }
 
+button[disabled] {
+    color: #aaa;
+}
+
 .sale {
     font-size: 0.8em;
     color: #bf0000;
@@ -28,11 +32,27 @@ input.product--quantity {
     font-size: 12px;
 }
 
-button.product--button {
+.product--button {
     background: #fff;
     border: 1px solid;
     margin: 4px 0;
     display: block;
+}
+
+.product--button[disabled] {
+    color: #aaa;
+    position: relative;
+    &:hover:after {
+        content: 'Don\'t forget to select a Size';
+        position: absolute;
+        width: 10em;
+        background: #ccc;
+        color: #000;
+        padding: 7px;
+        font-size: 0.8em;
+        left: 0;
+        top: 35px;
+    }
 }
 
 .thumbnails--thumbs {
@@ -77,7 +97,6 @@ button.product--button {
     min-width: 10em;
     font-size: 0.8em;
     color: #bf0000;
-    display: none;
     bottom: 33px;
     background: #fff;
     padding: 8px;
@@ -88,7 +107,10 @@ button.product--button {
 
 .running-low {
     position: absolute;
-    display: none;
+    top: 32px;
+    font-size: 0.8em;
+    color: #bf0000;
+    font-weight: bold;
 }
 
 .swatches {
@@ -109,6 +131,9 @@ button.product--button {
 .thumbnails {
     img {
         cursor: pointer;
+        &.selected {
+            border: 1px solid #eb5190;
+        }
     }
 }
 
@@ -125,6 +150,12 @@ button.product--button {
 
 .product-size {
     margin: 10px 0;
+    button {
+        outline: none;
+        &.selected {
+            border: 1px solid #eb5190;
+        }
+    }
 }
 
 .hidden {

@@ -16,9 +16,9 @@
     <div class="product-size clearfix">
         {{#each product.skusInfo}}
         <div class="sizes hidden" data-color-code={{colorId}}>
-            <button {{#unless stockLevel}}disabled{{/unless}}>{{size}}</button>
-            {{#unless stockLevel}}<div class="out-of-stock">Out of stock</div>{{/unless}}
-            {{#equal stockLevel 1}}<div class="running-low">Only {{stockLevel}} left </div>{{/equal}}
+            <button {{#unless stockLevel}}disabled{{/unless}} data-product-size="{{size}}">{{size}}</button>
+            {{#unless stockLevel}}<div class="out-of-stock hidden">Out of stock</div>{{/unless}}
+            {{#equal stockLevel 1}}<div class="running-low hidden">Only {{stockLevel}} left </div>{{/equal}}
         </div>
         {{/each}}
         

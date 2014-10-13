@@ -1,1 +1,126 @@
-!function t(e,r,i){function s(a,o){if(!r[a]){if(!e[a]){var n="function"==typeof require&&require;if(!o&&n)return n(a,!0);if(c)return c(a,!0);var u=new Error("Cannot find module '"+a+"'");throw u.code="MODULE_NOT_FOUND",u}var d=r[a]={exports:{}};e[a][0].call(d.exports,function(t){var r=e[a][1][t];return s(r?r:t)},d,d.exports,t,e,r,i)}return r[a].exports}for(var c="function"==typeof require&&require,a=0;a<i.length;a++)s(i[a]);return s}({1:[function(t,e){"use strict";var r=function(){this.productDetails=document.querySelector(".product-details"),this.queryFromProduct=this.productDetails.querySelector.bind(this.productDetails),this.primaryImage=this.queryFromProduct(".primary-image"),this.swatches=this.queryFromProduct(".swatches"),this.setupSizesBySwatch(),this._bindEvents()},i=r.prototype;i.setupSizesBySwatch=function(){var t=this.queryFromProduct(".selected"),e=t.getAttribute("data-color-code"),r=this.queryFromProduct(".product-size"),i=r.children,s=0,c=i.length;for(s;c>s;s++)i[s].getAttribute("data-color-code")===e?i[s].classList.remove("hidden"):i[s].classList.add("hidden")},i.changeProductColors=function(t){var e,r=t.target.getAttribute("data-color-code"),i=t.target.getAttribute("data-view-code"),s=this.primaryImage.src.split("_"),c=this.queryFromProduct(".thumbnails"),a=c.children,o=a.length,n=0;for(s[1]=r,s[2]=i,this.primaryImage.src=s.join("_"),n;o>n;n++)e=a[n].children[0].src.split("_"),e[1]=r,a[n].children[0].src=e.join("_")},i.changeCurrentSwatch=function(t){var e=Array.prototype.slice.call(this.swatches.children),r=this.queryFromProduct(".current-color");"IMG"===t.target.tagName&&(e.map(function(t){return t.classList.remove("selected")}),t.target.classList.add("selected"),r.textContent=t.target.getAttribute("data-color-name").toLowerCase(),this.setupSizesBySwatch(),this.changeProductColors(t))},i.changeImages=function(t){var e,r=t.target.getAttribute("data-view-code");"IMG"===t.target.tagName&&(e=this.primaryImage.src.slice(0,-1),this.primaryImage.src=e+r)},i._bindEvents=function(){var t=this.queryFromProduct(".thumbnails");t.addEventListener("click",this.changeImages.bind(this)),this.swatches.addEventListener("click",this.changeCurrentSwatch.bind(this))},e.exports=new r},{}]},{},[1]);
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+'use strict';
+
+var SingleProductItem = function() {
+    this.productDetails = document.querySelector('.product-details');
+    this.queryFromProduct = this.productDetails.querySelector.bind(this.productDetails);
+    this.primaryImage = this.queryFromProduct('.primary-image');
+    this.swatches = this.queryFromProduct('.swatches');
+    this.thumbnails = this.queryFromProduct('.thumbnails');
+    this.sizes = this.queryFromProduct('.product-size');
+
+    this.setupSizesBySwatch();
+    this._bindEvents();
+};
+var SPIProto = SingleProductItem.prototype;
+
+
+SPIProto.setupSizesBySwatch = function() {
+    var productOptions = this.queryFromProduct('.product-options');
+    var selectedSwatch = productOptions.querySelector('.selected');
+    var swatchColorCode = selectedSwatch.getAttribute('data-color-code');
+    var swatchName = selectedSwatch.getAttribute('data-color-name');
+    var currentColor = this.queryFromProduct('.current-color');
+    var productSizes = this.queryFromProduct('.product-size');
+    var sizes = productSizes.children;
+    var idx = 0;
+    var sizesLength = sizes.length;
+
+    currentColor.textContent = swatchName.toLowerCase();
+    for (idx; idx < sizesLength; idx++) {
+        if (sizes[idx].getAttribute('data-color-code') === swatchColorCode) {
+            sizes[idx].classList.remove('hidden');
+        } else {
+            sizes[idx].classList.add('hidden');
+        }
+    }
+};
+
+
+SPIProto.changeProductColors = function(e) {
+    var colorCode = e.target.getAttribute('data-color-code');
+    var viewCode = e.target.getAttribute('data-view-code');
+    var primaryImageArray = this.primaryImage.src.split('_');
+    var thumbnails = this.queryFromProduct('.thumbnails');
+    var thumbs = thumbnails.children;
+    var thumbsLength = thumbs.length;
+    var idx = 0;
+    var tmp;
+    primaryImageArray[1] = colorCode;
+    primaryImageArray[2] = viewCode;
+    this.primaryImage.src = primaryImageArray.join('_');
+
+    for (idx; idx < thumbsLength; idx++) {
+        tmp = thumbs[idx].children[0].src.split('_');
+        tmp[1] = colorCode;
+        thumbs[idx].children[0].src = tmp.join('_');
+    }
+};
+
+SPIProto.changeCurrentSwatch = function(e) {
+    var swatchesArray = [].slice.call(this.swatches.children);
+    var currentColor = this.queryFromProduct('.current-color');
+    if (e.target.tagName !== 'IMG') {
+        return;
+    }
+    swatchesArray.map(function(swatch) {
+        return swatch.classList.remove('selected');
+    });
+    e.target.classList.add('selected');
+    currentColor.textContent = e.target.getAttribute('data-color-name').toLowerCase();
+    this.setupSizesBySwatch();
+    this.changeProductColors(e);
+};
+
+
+SPIProto.changeImages = function(e) {
+    var thumbnailsArray = [].slice.call(this.thumbnails.children);
+    var dataCode = e.target.getAttribute('data-view-code');
+    var tempImage;
+    if (e.target.tagName !== 'IMG') {
+        return;
+    }
+    thumbnailsArray.map(function(thumb) {
+        return thumb.children[0].classList.remove('selected');
+    });
+    e.target.classList.add('selected');
+    tempImage = this.primaryImage.src.slice(0, -1);
+    this.primaryImage.src = tempImage + dataCode;
+};
+
+SPIProto.selectSize = function(e) {
+    var sizesArray = [].slice.call(this.sizes.children);
+    var swatchesArray = [].slice.call(this.swatches.children);
+    var basketButton = this.queryFromProduct('.product--button');
+    if (e.target.tagName !== 'BUTTON') {
+        return;
+    }
+    sizesArray.map(function(size) {
+        size.children[0].classList.remove('selected');
+        if (size.children[0].nextElementSibling) {
+            size.children[0].nextElementSibling.classList.add('hidden');
+        }
+        if (e.target.getAttribute('data-product-size') === size.children[0].getAttribute('data-product-size')) {
+                size.children[0].classList.add('selected');
+        }
+    });
+    swatchesArray.map(function(swatch) {
+        swatch.setAttribute('data-product-size', e.target.textContent);
+    });
+
+    if (e.target.nextElementSibling) {
+        e.target.nextElementSibling.classList.remove('hidden');
+    }
+    basketButton.removeAttribute('disabled');
+};
+
+SPIProto._bindEvents = function() {
+    this.thumbnails.addEventListener('click', this.changeImages.bind(this));
+    this.swatches.addEventListener('click', this.changeCurrentSwatch.bind(this));
+    this.sizes.addEventListener('click', this.selectSize.bind(this));
+};
+
+
+
+module.exports = new SingleProductItem();
+},{}]},{},[1]);

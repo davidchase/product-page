@@ -6,7 +6,7 @@
         {{#each thumbnails}}
         <li class="thumbnails--thumbs">
             <img
-            class="image"
+            class="image {{#if @first}}selected{{/if}}"
             data-view-code="{{this}}"
             src="{{../url}}{{../product.colors.[0].id}}_{{this}}?$detail-alt$" />
         </li>

@@ -13,7 +13,6 @@ module.exports = [{
             .then(function(response) {
                 var thumbnails = response.entity.product.colors[0].viewCode;
                 reply.view('./product/views/index', {
-                    defaultColor: 'Black Multi',
                     product: response.entity.product,
                     thumbnails: thumbnails,
                     url: 'http://img5.fpassets.com/is/image/FreePeople/',
