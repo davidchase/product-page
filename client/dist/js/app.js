@@ -8,23 +8,30 @@ var SingleProductItem = function() {
     this.swatches = this.queryFromProduct('.swatches');
     this.thumbnails = this.queryFromProduct('.thumbnails');
     this.sizes = this.queryFromProduct('.product-size');
+    this.productOptions = this.queryFromProduct('.product-options');
+    this.selectedSwatch = this.productOptions.querySelector('.selected');
 
+    // Init
     this.setupSizeOptions();
+    this.setupCurrentColor();
     this._bindEvents();
 };
 var SPIProto = SingleProductItem.prototype;
 
+SPIProto.setupCurrentColor = function() {
+    this.swatchName = this.selectedSwatch.getAttribute('data-color-name');
+    this.currentColor = this.queryFromProduct('.current-color');
+    this.currentColor.textContent = this.swatchName.toLowerCase();
+    return this.currentColor;
+};
 
 SPIProto.setupSizeOptions = function() {
-    var productOptions = this.queryFromProduct('.product-options');
-    var selectedSwatch = productOptions.querySelector('.selected');
-    var swatchColorCode = selectedSwatch.getAttribute('data-color-code');
-    var swatchName = selectedSwatch.getAttribute('data-color-name');
-    var currentColor = this.queryFromProduct('.current-color');
+    var swatchColorCode = this.selectedSwatch.getAttribute('data-color-code');
     var sizeText = this.queryFromProduct('.select-size');
     var idx = 0;
     var sizes = this.sizes.children;
     var sizesLength = sizes.length;
+
     // Get the size buttons
     // filter and get the one not disabled
     // if only one button is not disabled make
@@ -39,7 +46,9 @@ SPIProto.setupSizeOptions = function() {
         singleProduct[0].classList.add('selected');
         sizeText.textContent = 'Size: ' + singleProduct[0].getAttribute('data-product-size');
     }
-    currentColor.textContent = swatchName.toLowerCase();
+
+    // Setup which size buttons
+    // are available to which swatch
     for (idx; idx < sizesLength; idx++) {
         if (sizes[idx].getAttribute('data-color-code') === swatchColorCode) {
             sizes[idx].classList.remove('hidden');
@@ -49,7 +58,6 @@ SPIProto.setupSizeOptions = function() {
     }
 
 };
-
 
 SPIProto.changeProductColors = function(e) {
     var colorCode = e.target.getAttribute('data-color-code');
