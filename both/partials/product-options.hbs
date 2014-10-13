@@ -12,13 +12,15 @@
         data-color-name="{{displayName}}" />
         {{/each}}
     </div>
-    <p>Sizes:</p>
+    <p class="select-size">Select a Size:</p>
     <div class="product-size clearfix">
         {{#each product.skusInfo}}
         <div class="sizes hidden" data-color-code={{colorId}}>
             <button {{#unless stockLevel}}disabled{{/unless}} data-product-size="{{size}}">{{size}}</button>
             {{#unless stockLevel}}<div class="out-of-stock hidden">Out of stock</div>{{/unless}}
-            {{#equal stockLevel 1}}<div class="running-low hidden">Only {{stockLevel}} left </div>{{/equal}}
+            {{#when stockLevel 'eq' 1}}<div class="running-low hidden">Only {{stockLevel}} left!</div>{{/when}}
+            {{#when stockLevel 'eq' 2}}<div class="running-low hidden">Only {{stockLevel}} left! </div>{{/when}}
+            {{#between 3 stockLevel 5}}<div class="running-low hidden">Only a few left!</div>{{/between}}
         </div>
         {{/each}}
         

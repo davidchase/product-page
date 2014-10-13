@@ -9,23 +9,36 @@ var SingleProductItem = function() {
     this.thumbnails = this.queryFromProduct('.thumbnails');
     this.sizes = this.queryFromProduct('.product-size');
 
-    this.setupSizesBySwatch();
+    this.setupSizeOptions();
     this._bindEvents();
 };
 var SPIProto = SingleProductItem.prototype;
 
 
-SPIProto.setupSizesBySwatch = function() {
+SPIProto.setupSizeOptions = function() {
     var productOptions = this.queryFromProduct('.product-options');
     var selectedSwatch = productOptions.querySelector('.selected');
     var swatchColorCode = selectedSwatch.getAttribute('data-color-code');
     var swatchName = selectedSwatch.getAttribute('data-color-name');
     var currentColor = this.queryFromProduct('.current-color');
-    var productSizes = this.queryFromProduct('.product-size');
-    var sizes = productSizes.children;
+    var sizeText = this.queryFromProduct('.select-size');
     var idx = 0;
+    var sizes = this.sizes.children;
     var sizesLength = sizes.length;
-
+    // Get the size buttons
+    // filter and get the one not disabled
+    // if only one button is not disabled make
+    // select it for the user...
+    var singleProduct = [];
+    var buttons = this.sizes.getElementsByTagName('button');
+    buttons = [].slice.call(buttons);
+    singleProduct = buttons.filter(function(button) {
+        return button.disabled === false;
+    });
+    if (singleProduct.length === 1) {
+        singleProduct[0].classList.add('selected');
+        sizeText.textContent = 'Size: ' + singleProduct[0].getAttribute('data-product-size');
+    }
     currentColor.textContent = swatchName.toLowerCase();
     for (idx; idx < sizesLength; idx++) {
         if (sizes[idx].getAttribute('data-color-code') === swatchColorCode) {
@@ -34,6 +47,7 @@ SPIProto.setupSizesBySwatch = function() {
             sizes[idx].classList.add('hidden');
         }
     }
+
 };
 
 
@@ -44,8 +58,8 @@ SPIProto.changeProductColors = function(e) {
     var thumbnails = this.queryFromProduct('.thumbnails');
     var thumbs = thumbnails.children;
     var thumbsLength = thumbs.length;
-    var idx = 0;
     var tmp;
+    var idx = 0;
     primaryImageArray[1] = colorCode;
     primaryImageArray[2] = viewCode;
     this.primaryImage.src = primaryImageArray.join('_');
@@ -68,15 +82,14 @@ SPIProto.changeCurrentSwatch = function(e) {
     });
     e.target.classList.add('selected');
     currentColor.textContent = e.target.getAttribute('data-color-name').toLowerCase();
-    this.setupSizesBySwatch();
+    this.setupSizeOptions();
     this.changeProductColors(e);
 };
 
-
 SPIProto.changeImages = function(e) {
+    var tempImage;
     var thumbnailsArray = [].slice.call(this.thumbnails.children);
     var dataCode = e.target.getAttribute('data-view-code');
-    var tempImage;
     if (e.target.tagName !== 'IMG') {
         return;
     }
@@ -91,17 +104,21 @@ SPIProto.changeImages = function(e) {
 SPIProto.selectSize = function(e) {
     var sizesArray = [].slice.call(this.sizes.children);
     var swatchesArray = [].slice.call(this.swatches.children);
+    var sizeText = this.queryFromProduct('.select-size');
     var basketButton = this.queryFromProduct('.product--button');
     if (e.target.tagName !== 'BUTTON') {
         return;
     }
+    sizeText.textContent = 'Size: ' + e.target.textContent;
     sizesArray.map(function(size) {
         size.children[0].classList.remove('selected');
         if (size.children[0].nextElementSibling) {
             size.children[0].nextElementSibling.classList.add('hidden');
         }
-        if (e.target.getAttribute('data-product-size') === size.children[0].getAttribute('data-product-size')) {
+        if (e.target.textContent === size.children[0].getAttribute('data-product-size')) {
+            if (!size.children[0].disabled) {
                 size.children[0].classList.add('selected');
+            }
         }
     });
     swatchesArray.map(function(swatch) {

@@ -143,38 +143,6 @@
         "parentCategoryId": null
       },
       {
-        "skuId": "30889695",
-        "productIds": [
-          "30889687"
-        ],
-        "displayName": "",
-        "description": "",
-        "availableStatus": null,
-        "stockLevel": 20.0,
-        "backorder": null,
-        "preorder": null,
-        "sizeId": "30889687_4000",
-        "size": "XS",
-        "colorId": "020",
-        "color": "BEIGE",
-        "type": null,
-        "availabilityDate": "10/16/13",
-        "priceLists": null,
-        "discountable": null,
-        "giftWrappable": null,
-        "hasShippingCharges": null,
-        "ipBrandCode": null,
-        "isAvailable": null,
-        "isDropShip": null,
-        "overweightCharge": null,
-        "parentProduct": null,
-        "retailSku": null,
-        "shippingCharge": null,
-        "skuCode": null,
-        "onlineOnly": null,
-        "parentCategoryId": null
-      },
-      {
         "skuId": "30889703",
         "productIds": [
           "30889687"
@@ -182,7 +150,7 @@
         "displayName": "",
         "description": "",
         "availableStatus": null,
-        "stockLevel": 10.0,
+        "stockLevel": 5,
         "backorder": null,
         "preorder": null,
         "sizeId": "30889687_5000",
