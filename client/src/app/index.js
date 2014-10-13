@@ -8,7 +8,7 @@ var SingleProductItem = function() {
     this.thumbnails = this.queryFromProduct('.thumbnails');
     this.sizes = this.queryFromProduct('.product-size');
     this.productOptions = this.queryFromProduct('.product-options');
-    this.selectedSwatch = this.productOptions.querySelector('.selected');
+
 
     // Init
     this.setupSizeOptions();
@@ -18,14 +18,16 @@ var SingleProductItem = function() {
 var SPIProto = SingleProductItem.prototype;
 
 SPIProto.setupCurrentColor = function() {
-    this.swatchName = this.selectedSwatch.getAttribute('data-color-name');
+    var selectedSwatch = this.productOptions.querySelector('.selected');
+    this.swatchName = selectedSwatch.getAttribute('data-color-name');
     this.currentColor = this.queryFromProduct('.current-color');
     this.currentColor.textContent = this.swatchName.toLowerCase();
     return this.currentColor;
 };
 
 SPIProto.setupSizeOptions = function() {
-    var swatchColorCode = this.selectedSwatch.getAttribute('data-color-code');
+    var selectedSwatch = this.productOptions.querySelector('.selected');
+    var swatchColorCode = selectedSwatch.getAttribute('data-color-code');
     var sizeText = this.queryFromProduct('.select-size');
     var idx = 0;
     var sizes = this.sizes.children;
