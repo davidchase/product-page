@@ -5,6 +5,10 @@
         "mocha": true
     },
 
+    "globals": {
+        "Zombie": true
+    },
+
     "rules": {
         "block-scoped-var": 2,
         "complexity": [1, 5],

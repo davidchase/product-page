@@ -1,5 +1,4 @@
 'use strict';
-var Zombie = require('zombie');
 var browser = new Zombie({
     debug: true
 });

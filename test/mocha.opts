@@ -1,5 +1,4 @@
---require should
+--require ./test/testHooks
 --reporter spec
 --ui tdd
 --debug
---watch
