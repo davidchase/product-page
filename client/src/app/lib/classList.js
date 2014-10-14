@@ -1,4 +1,8 @@
 'use strict';
+// ClassList polyfill made to work with zombie testing
+// @todo add support for multiple add and remove of classes
+// challenge not to use Regex
+
 
 var ClassListPoly = function() {};
 
