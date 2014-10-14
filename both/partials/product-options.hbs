@@ -5,7 +5,7 @@
     <div class="swatches">
         {{#each product.colors}}
         <img
-        class="{{#if @first}}selected{{/if}}"
+        class="swatch-button {{#if @first}}selected{{/if}}"
         src="{{../swatchUrl}}{{id}}_swatch?$swatch$"
         data-color-code="{{colorCode}}"
         data-view-code="{{viewCode.[0]}}"

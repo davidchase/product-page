@@ -18,17 +18,17 @@ gulp.task('browserify', function() {
         .transform(html)
         .bundle()
         .pipe(source('app.js'))
-        // .pipe(buffer())
-        // .pipe(ugilfy())
+        .pipe(buffer())
+        .pipe(ugilfy())
         .pipe(gulp.dest('./client/dist/js'))
         .on('error', function(err) {
             console.log(err);
         });
 });
 
-gulp.task('browserify-watch', function(){
+gulp.task('browserify-watch', function() {
     var watcher = gulp.watch('./client/src/app/**/*.js', ['browserify']);
-    watcher.on('change', function(event){
-       return console.log('File ' + event.path + ' was ' + event.type + ', running browserify...');
+    watcher.on('change', function(event) {
+        return console.log('File ' + event.path + ' was ' + event.type + ', running browserify...');
     });
 });

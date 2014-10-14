@@ -1,5 +1,7 @@
 'use strict';
 
+var polyFill = require('./lib/classList');
+
 var SingleProductItem = function() {
     this.productDetails = document.querySelector('.product-details');
     this.queryFromProduct = this.productDetails.querySelector.bind(this.productDetails);
@@ -44,7 +46,7 @@ SPIProto.setupSizeOptions = function() {
         return button.disabled === false;
     });
     if (singleProduct.length === 1) {
-        singleProduct[0].classList.add('selected');
+        polyFill.addClass(singleProduct[0], 'selected');
         sizeText.textContent = 'Size: ' + singleProduct[0].getAttribute('data-product-size');
     }
 
@@ -52,9 +54,9 @@ SPIProto.setupSizeOptions = function() {
     // are available to which swatch
     for (idx; idx < sizesLength; idx++) {
         if (sizes[idx].getAttribute('data-color-code') === swatchColorCode) {
-            sizes[idx].classList.remove('hidden');
+            polyFill.removeClass(sizes[idx], 'hidden');
         } else {
-            sizes[idx].classList.add('hidden');
+            polyFill.addClass(sizes[idx], 'hidden');
         }
     }
 
@@ -83,13 +85,13 @@ SPIProto.changeProductColors = function(e) {
 SPIProto.changeCurrentSwatch = function(e) {
     var swatchesArray = [].slice.call(this.swatches.children);
     var currentColor = this.queryFromProduct('.current-color');
-    if (e.target.tagName !== 'IMG') {
+    if (e.target.nodeName !== 'IMG') {
         return;
     }
     swatchesArray.map(function(swatch) {
-        return swatch.classList.remove('selected');
+        return polyFill.removeClass(swatch, 'selected');
     });
-    e.target.classList.add('selected');
+    polyFill.addClass(e.target, 'selected');
     currentColor.textContent = e.target.getAttribute('data-color-name').toLowerCase();
     this.setupSizeOptions();
     this.changeProductColors(e);
@@ -99,13 +101,13 @@ SPIProto.changeImages = function(e) {
     var tempImage;
     var thumbnailsArray = [].slice.call(this.thumbnails.children);
     var dataCode = e.target.getAttribute('data-view-code');
-    if (e.target.tagName !== 'IMG') {
+    if (e.target.nodeName !== 'IMG') {
         return;
     }
     thumbnailsArray.map(function(thumb) {
-        return thumb.children[0].classList.remove('selected');
+        return polyFill.removeClass(thumb.children[0], 'selected');
     });
-    e.target.classList.add('selected');
+    polyFill.addClass(e.target, 'selected');
     tempImage = this.primaryImage.src.slice(0, -1);
     this.primaryImage.src = tempImage + dataCode;
 };
@@ -115,18 +117,18 @@ SPIProto.selectSize = function(e) {
     var swatchesArray = [].slice.call(this.swatches.children);
     var sizeText = this.queryFromProduct('.select-size');
     var basketButton = this.queryFromProduct('.product--button');
-    if (e.target.tagName !== 'BUTTON') {
+    if (e.target.nodeName !== 'BUTTON') {
         return;
     }
     sizeText.textContent = 'Size: ' + e.target.textContent;
     sizesArray.map(function(size) {
-        size.children[0].classList.remove('selected');
+        polyFill.removeClass(size.children[0], 'selected');
         if (size.children[0].nextElementSibling) {
-            size.children[0].nextElementSibling.classList.add('hidden');
+            polyFill.addClass(size.children[0].nextElementSibling, 'hidden');
         }
         if (e.target.textContent === size.children[0].getAttribute('data-product-size')) {
             if (!size.children[0].disabled) {
-                size.children[0].classList.add('selected');
+                polyFill.addClass(size.children[0], 'selected');
             }
         }
     });
@@ -135,7 +137,7 @@ SPIProto.selectSize = function(e) {
     });
 
     if (e.target.nextElementSibling) {
-        e.target.nextElementSibling.classList.remove('hidden');
+        polyFill.removeClass(e.target.nextElementSibling, 'hidden');
     }
     basketButton.removeAttribute('disabled');
 };
@@ -147,5 +149,4 @@ SPIProto._bindEvents = function() {
 };
 
 
-
-module.exports = new SingleProductItem();
+new SingleProductItem();

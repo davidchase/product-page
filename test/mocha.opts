@@ -1,3 +1,5 @@
 --require should
 --reporter spec
 --ui tdd
+--debug
+--watch
