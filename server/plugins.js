@@ -1,12 +1,15 @@
 'use strict';
-
+var Good = require('good');
 module.exports = function(server) {
     var options = {
-        maxLogSize: 1024 * 1024 * 1024,
-        subscribers: {
-            'console': ['request', 'log', 'error'],
-            'tmp/logs/': ['ops', 'request', 'log', 'error']
-        }
+        reporters: [{
+            reporter: Good.GoodConsole,
+            args: [{
+                events: {
+                    log: ['error', 'medium']
+                }
+                }]
+            }]
     };
 
     server.pack.register({

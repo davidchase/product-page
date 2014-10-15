@@ -10,6 +10,8 @@ var SingleProductItem = function() {
     this.thumbnails = this.queryFromProduct('.thumbnails');
     this.sizes = this.queryFromProduct('.product-size');
     this.productOptions = this.queryFromProduct('.product-options');
+    this.quantityInput = this.queryFromProduct('.product--quantity');
+    this.productButton = this.queryFromProduct('.product--button');
 
 
     // Init
@@ -142,11 +144,40 @@ SPIProto.selectSize = function(e) {
     basketButton.removeAttribute('disabled');
 };
 
+SPIProto._sanitizeInput = function(e) {
+    var key = e.keyCode || e.which;
+    // prevent a-z and other non-numeric inputs
+    if (key < 48 || key > 57) {
+        e.preventDefault();
+    }
+    // prevent pasting
+    if (e.type === 'paste') {
+        e.preventDefault();
+    }
+};
+
+SPIProto.preventZeros = function(e) {
+    var adjusted;
+    if (e.target.value.indexOf(0) === 0) {
+        adjusted = e.target.value.slice(-1, 2);
+        adjusted = adjusted === '0' ? '1' : adjusted;
+        e.target.value = adjusted;
+    }
+};
+
+SPIProto.addToBasket = function() {
+    console.log(this.quantityInput.value);
+};
+
 SPIProto._bindEvents = function() {
     this.thumbnails.addEventListener('click', this.changeImages.bind(this));
     this.swatches.addEventListener('click', this.changeCurrentSwatch.bind(this));
     this.sizes.addEventListener('click', this.selectSize.bind(this));
+    this.quantityInput.addEventListener('keypress', this._sanitizeInput.bind(this));
+    this.quantityInput.addEventListener('paste', this._sanitizeInput.bind(this));
+    this.quantityInput.addEventListener('blur', this.preventZeros.bind(this));
+    this.productButton.addEventListener('click', this.addToBasket.bind(this));
 };
 
 
-new SingleProductItem();
+module.exports = new SingleProductItem();

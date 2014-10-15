@@ -11,10 +11,6 @@ input {
     width: 100%;
 }
 
-button[disabled] {
-    color: #aaa;
-}
-
 .sale {
     font-size: 0.8em;
     color: #bf0000;
@@ -37,10 +33,14 @@ input.product--quantity {
 }
 
 .product--button {
-    background: #fff;
+    background: #eb5190;
     border: 1px solid;
     margin: 4px 0;
     display: block;
+    color: #fff;
+    font-size: .9em;
+    padding: 9px;
+    min-width: 11em;
 }
 
 .swatch-button {
@@ -54,16 +54,17 @@ input.product--quantity {
 .product--button[disabled] {
     color: #aaa;
     position: relative;
+    background:#fff;
     &:hover:after {
-        content: 'Don\'t forget to select a Size';
+        content: attr(data-hover);
         position: absolute;
-        width: 10em;
-        background: #ccc;
+        min-width: 12em;
+        background: #fff;
         color: #000;
-        padding: 7px;
-        font-size: 0.8em;
+        padding: 10px;
+        font-size: 0.9em;
         left: 0;
-        top: 35px;
+        top: 0px;
     }
 }
 
