@@ -156,16 +156,16 @@ SPIProto._preventNonNumericInput = function(e) {
     }
 };
 
-SPIProto._sanitize = function() {
-    var adjusted = this.quantityInput.value.match(/([^0-9])|(0{3})/gi) ? '1' : this.quantityInput.value;
-    if (adjusted.indexOf(0) === 0) {
-        adjusted = adjusted.slice(-1, 2);
-    }
+SPIProto._sanitizeInput = function() {
+    var adjusted = parseInt(this.quantityInput.value, 10);
+    // If value is NaN or eql to 0 then it set to 1
+    // otherwise return value
+    adjusted = isNaN(adjusted) || adjusted === 0 ? 1 : adjusted;
     this.quantityInput.value = adjusted;
 };
 
 SPIProto.addToBasket = function() {
-    this._sanitize();
+    this._sanitizeInput();
 };
 
 SPIProto._bindEvents = function() {
@@ -174,7 +174,7 @@ SPIProto._bindEvents = function() {
     this.sizes.addEventListener('click', this.selectSize.bind(this));
     this.quantityInput.addEventListener('keypress', this._preventNonNumericInput.bind(this));
     this.quantityInput.addEventListener('paste', this._preventNonNumericInput.bind(this));
-    this.quantityInput.addEventListener('blur', this._sanitize.bind(this));
+    this.quantityInput.addEventListener('blur', this._sanitizeInput.bind(this));
     this.productButton.addEventListener('click', this.addToBasket.bind(this));
 };
 
