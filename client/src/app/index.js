@@ -144,7 +144,7 @@ SPIProto.selectSize = function(e) {
     basketButton.removeAttribute('disabled');
 };
 
-SPIProto._sanitizeInput = function(e) {
+SPIProto._preventNonNumericInput = function(e) {
     var key = e.keyCode || e.which;
     // prevent a-z and other non-numeric inputs
     if (key < 48 || key > 57) {
@@ -156,26 +156,25 @@ SPIProto._sanitizeInput = function(e) {
     }
 };
 
-SPIProto.preventZeros = function(e) {
-    var adjusted;
-    if (e.target.value.indexOf(0) === 0) {
-        adjusted = e.target.value.slice(-1, 2);
-        adjusted = adjusted === '0' ? '1' : adjusted;
-        e.target.value = adjusted;
+SPIProto._sanitize = function() {
+    var adjusted = this.quantityInput.value.match(/([^0-9])|(0{3})/gi) ? '1' : this.quantityInput.value;
+    if (adjusted.indexOf(0) === 0) {
+        adjusted = adjusted.slice(-1, 2);
     }
+    this.quantityInput.value = adjusted;
 };
 
 SPIProto.addToBasket = function() {
-    console.log(this.quantityInput.value);
+    this._sanitize();
 };
 
 SPIProto._bindEvents = function() {
     this.thumbnails.addEventListener('click', this.changeImages.bind(this));
     this.swatches.addEventListener('click', this.changeCurrentSwatch.bind(this));
     this.sizes.addEventListener('click', this.selectSize.bind(this));
-    this.quantityInput.addEventListener('keypress', this._sanitizeInput.bind(this));
-    this.quantityInput.addEventListener('paste', this._sanitizeInput.bind(this));
-    this.quantityInput.addEventListener('blur', this.preventZeros.bind(this));
+    this.quantityInput.addEventListener('keypress', this._preventNonNumericInput.bind(this));
+    this.quantityInput.addEventListener('paste', this._preventNonNumericInput.bind(this));
+    this.quantityInput.addEventListener('blur', this._sanitize.bind(this));
     this.productButton.addEventListener('click', this.addToBasket.bind(this));
 };
 
