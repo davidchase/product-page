@@ -1,6 +1,7 @@
 'use strict';
 
 var polyFill = require('./lib/classList');
+var janitor = require('./lib/janitor');
 
 var SingleProductItem = function() {
     this.productDetails = document.querySelector('.product-details');
@@ -145,38 +146,20 @@ SPIProto.selectSize = function(e) {
     basketButton.removeAttribute('disabled');
 };
 
-SPIProto._preventNonNumericInput = function(e) {
-    var key = e.keyCode || e.which;
-    // prevent a-z and other non-numeric inputs
-    if (key < 48 || key > 57) {
-        e.preventDefault();
-    }
-    // prevent pasting
-    if (e.type === 'paste') {
-        e.preventDefault();
-    }
-};
-
-SPIProto._sanitizeInput = function() {
-    var adjusted = parseInt(this.quantityInput.value, 10);
-    // If value is NaN or eql to 0 then it set to 1
-    // otherwise return value
-    adjusted = isNaN(adjusted) || adjusted === 0 ? 1 : adjusted;
-    this.quantityInput.value = adjusted;
-};
 
 SPIProto.addToBasket = function() {
-    this._sanitizeInput();
+    janitor.sanitizeInput(this.quantityInput);
 };
 
 SPIProto._bindEvents = function() {
     this.thumbnails.addEventListener('click', this.changeImages.bind(this));
     this.swatches.addEventListener('click', this.changeCurrentSwatch.bind(this));
     this.sizes.addEventListener('click', this.selectSize.bind(this));
-    this.quantityInput.addEventListener('keypress', this._preventNonNumericInput.bind(this));
-    this.quantityInput.addEventListener('paste', this._preventNonNumericInput.bind(this));
-    this.quantityInput.addEventListener('blur', this._sanitizeInput.bind(this));
     this.productButton.addEventListener('click', this.addToBasket.bind(this));
+
+    this.quantityInput.addEventListener('keypress', janitor.preventNonNumericInput);
+    this.quantityInput.addEventListener('paste', janitor.preventNonNumericInput);
+    this.quantityInput.addEventListener('blur', janitor.sanitizeInput.bind(this, this.quantityInput));
 };
 
 module.exports = new SingleProductItem();
