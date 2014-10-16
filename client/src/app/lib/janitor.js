@@ -20,6 +20,7 @@ JProto.sanitizeInput = function(el) {
     // otherwise return value
     adjusted = isNaN(adjusted) || adjusted === 0 ? 1 : adjusted;
     el.value = adjusted;
+    return el;
 };
 
 module.exports = new Janitor();
