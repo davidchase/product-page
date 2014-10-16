@@ -31,7 +31,7 @@ test('randomly clicking a thumbnail will change the main image', function() {
     browser.fire(thumbnail, 'click', function() {
         var primaryImage = browser.query('.primary-image');
         primaryImage.src.indexOf(viewCode).should.not.eql(-1);
-        primaryImage.src.split('_')[2].should.eql(viewCode);
+        primaryImage.src.split('_').pop().should.eql(viewCode);
     });
 });
 

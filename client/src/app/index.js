@@ -13,7 +13,6 @@ var SingleProductItem = function() {
     this.quantityInput = this.queryFromProduct('.product--quantity');
     this.productButton = this.queryFromProduct('.product--button');
 
-
     // Init
     this.setupSizeOptions();
     this.setupCurrentColor();
@@ -81,7 +80,9 @@ SPIProto.changeProductColors = function(e) {
         tmp = thumbs[idx].children[0].src.split('_');
         tmp[1] = colorCode;
         thumbs[idx].children[0].src = tmp.join('_');
+        polyFill.removeClass(thumbs[idx].children[0], 'selected');
     }
+    return polyFill.addClass(thumbs[0].children[0], 'selected');
 };
 
 SPIProto.changeCurrentSwatch = function(e) {
@@ -177,6 +178,5 @@ SPIProto._bindEvents = function() {
     this.quantityInput.addEventListener('blur', this._sanitizeInput.bind(this));
     this.productButton.addEventListener('click', this.addToBasket.bind(this));
 };
-
 
 module.exports = new SingleProductItem();
