@@ -6,7 +6,8 @@
   "scripts": {
     "install": "napa",
     "test": "mocha",
-    "start": "node server.js"
+    "start": "node server.js",
+    "poststart": "ngrok -subdomain=monkeybusiness 9000"
   },
   "napa": {
     "foundation": "zurb/bower-foundation"

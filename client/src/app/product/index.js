@@ -99,6 +99,7 @@ SPIProto.changeCurrentSwatch = function(e) {
     currentColor.textContent = e.target.getAttribute('data-color-name').toLowerCase();
     this.setupSizeOptions();
     this.changeProductColors(e);
+    this.productButton.disabled = true;
 };
 
 SPIProto.changeImages = function(e) {
@@ -146,14 +147,33 @@ SPIProto.selectSize = function(e) {
     basketButton.removeAttribute('disabled');
 };
 
-
 SPIProto.addToBasket = function() {
+    var sendObj;
     janitor.sanitizeInput(this.quantityInput);
+    sendObj = {
+        productId: this.queryFromProduct('.product-id').innerHTML.replace(/\D/ig, ''),
+        size: this.sizes.querySelector('.selected').innerHTML,
+        quantity: this.quantityInput.value,
+        color: this.currentColor.innerHTML
+    };
+    console.log(sendObj, JSON.stringify(sendObj));
+};
+
+SPIProto.checkStockLevel = function() {
+    var sizes = this.sizes.getElementsByClassName('sizes');
+    var sizesArray = [].slice.call(sizes);
+    sizesArray.forEach(function(size) {
+        if (size.className.indexOf('hidden') === -1 &&
+            size.getAttribute('data-is-disabled') === '') {
+            this.productButton.disabled = false;
+        }
+    }.bind(this));
 };
 
 SPIProto._bindEvents = function() {
     this.thumbnails.addEventListener('click', this.changeImages.bind(this));
     this.swatches.addEventListener('click', this.changeCurrentSwatch.bind(this));
+    this.swatches.addEventListener('click', this.checkStockLevel.bind(this));
     this.sizes.addEventListener('click', this.selectSize.bind(this));
     this.productButton.addEventListener('click', this.addToBasket.bind(this));
 

@@ -1,14 +1,18 @@
 {{> product-images}}
-<div class="product-content small-8 large-8 columns">
+<div class="product-content small-12 medium-4 large-4 columns">
     <h4>
     Details &amp; Shopping
     </h4>
     <div class="product-desc">
         <p>{{{product.longDescription}}}</p>
     </div>
-    <div itemprop="offers" itemscope="" itemtype="http://schema.org/Offer" class="prices">
-        <h4 itemprop="price">${{product.skusInfo.[0].priceLists.[0].salePrice}}</h4>
-        <p class="sale">was ${{product.skusInfo.[0].priceLists.[0].listPrice}}.00</p>
+    <div>
+        <ul class="product-care">
+            <li>*100% Cotton </li>
+            <li>*Slip: 100% Rayon </li>
+            <li>*Dry Clean </li>
+            <li>*Import </li>
+        </ul>
     </div>
 </div>
 {{> product-options}}

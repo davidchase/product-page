@@ -17,7 +17,7 @@ input {
 }
 
 .prices {
-    margin: 15px 0 0;
+    margin: 6px 0 0;
 }
 
 input.product--quantity {
@@ -34,13 +34,23 @@ input.product--quantity {
 
 .product--button {
     background: #eb5190;
-    border: 1px solid;
+    border: none;
     margin: 4px 0;
     display: block;
     color: #fff;
     font-size: .9em;
     padding: 9px;
     min-width: 11em;
+    outline: none;
+    box-shadow: 0px 4px 0px 0px #96365E;
+    &:active {
+        box-shadow: 0px 2px 0px 0px #96365E;
+        -moz-transform: translateY(2px);
+        -ms-transform: translateY(2px);
+        -o-transform: translateY(2px);
+        -webkit-transform: translateY(2px);
+        transform: translateY(2px);
+    }
 }
 
 .swatch-button {
@@ -54,7 +64,9 @@ input.product--quantity {
 .product--button[disabled] {
     color: #aaa;
     position: relative;
-    background:#fff;
+    border: 1px solid;
+    box-shadow: none;
+    background: #fff;
     &:hover:after {
         content: attr(data-hover);
         position: absolute;
@@ -66,6 +78,12 @@ input.product--quantity {
         left: 0;
         top: 0px;
     }
+}
+
+.product-care {
+    font-size: 0.8em;
+    margin: 24px 0 0;
+    padding: 10px 0;
 }
 
 .thumbnails--thumbs {
