@@ -1,5 +1,6 @@
 'use strict';
-
+// Testing if for loop better than forEach
+// probably moot for now...
 var polyFill = require('../lib/classList');
 var janitor = require('../lib/janitor');
 
@@ -92,7 +93,7 @@ SPIProto.changeCurrentSwatch = function(e) {
     if (e.target.nodeName !== 'IMG') {
         return;
     }
-    swatchesArray.map(function(swatch) {
+    swatchesArray.forEach(function(swatch) {
         return polyFill.removeClass(swatch, 'selected');
     });
     polyFill.addClass(e.target, 'selected');
@@ -109,7 +110,7 @@ SPIProto.changeImages = function(e) {
     if (e.target.nodeName !== 'IMG') {
         return;
     }
-    thumbnailsArray.map(function(thumb) {
+    thumbnailsArray.forEach(function(thumb) {
         return polyFill.removeClass(thumb.children[0], 'selected');
     });
     polyFill.addClass(e.target, 'selected');
@@ -121,12 +122,11 @@ SPIProto.selectSize = function(e) {
     var sizesArray = [].slice.call(this.sizes.children);
     var swatchesArray = [].slice.call(this.swatches.children);
     var sizeText = this.queryFromProduct('.select-size');
-    var basketButton = this.queryFromProduct('.product--button');
     if (e.target.nodeName !== 'BUTTON') {
         return;
     }
     sizeText.textContent = 'Size: ' + e.target.textContent;
-    sizesArray.map(function(size) {
+    sizesArray.forEach(function(size) {
         polyFill.removeClass(size.children[0], 'selected');
         if (size.children[0].nextElementSibling) {
             polyFill.addClass(size.children[0].nextElementSibling, 'hidden');
@@ -134,17 +134,16 @@ SPIProto.selectSize = function(e) {
         if (e.target.textContent === size.children[0].getAttribute('data-product-size')) {
             if (!size.children[0].disabled) {
                 polyFill.addClass(size.children[0], 'selected');
+                return size.children[0].nextElementSibling &&
+                    polyFill.removeClass(size.children[0].nextElementSibling, 'hidden');
             }
         }
     });
-    swatchesArray.map(function(swatch) {
+    swatchesArray.forEach(function(swatch) {
         swatch.setAttribute('data-product-size', e.target.textContent);
     });
 
-    if (e.target.nextElementSibling) {
-        polyFill.removeClass(e.target.nextElementSibling, 'hidden');
-    }
-    basketButton.removeAttribute('disabled');
+    this.productButton.disabled = false;
 };
 
 SPIProto.addToBasket = function() {
@@ -176,7 +175,6 @@ SPIProto._bindEvents = function() {
     this.swatches.addEventListener('click', this.checkStockLevel.bind(this));
     this.sizes.addEventListener('click', this.selectSize.bind(this));
     this.productButton.addEventListener('click', this.addToBasket.bind(this));
-
     this.quantityInput.addEventListener('keypress', janitor.preventNonNumericInput);
     this.quantityInput.addEventListener('paste', janitor.preventNonNumericInput);
     this.quantityInput.addEventListener('blur', janitor.sanitizeInput.bind(this, this.quantityInput));

@@ -3,7 +3,7 @@ var browser = new Zombie({
     debug: true
 });
 setup(function(done) {
-    browser.visit('http://monkeybusiness.ngrok.com/').then(done);
+    browser.visit('http://davidchase.ngrok.com/').then(done);
     browser.on('error', function(err) {
         console.dir(err);
     });

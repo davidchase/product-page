@@ -278,7 +278,7 @@
         "displayName": "",
         "description": "",
         "availableStatus": null,
-        "stockLevel": 1,
+        "stockLevel": 0,
         "backorder": null,
         "preorder": null,
         "sizeId": "30889687_5000",
