@@ -110,6 +110,7 @@ SPIProto.setupSizeOptions = function() {
     if (singleProduct.length === 1) {
         polyFill.addClass(singleProduct[0], 'selected');
         sizeText.textContent = 'Size: ' + singleProduct[0].getAttribute('data-product-size');
+        this.productButton.disabled = false;
     }
 
     // Setup which size buttons
