@@ -20,7 +20,7 @@ input {
     margin: 6px 0 0;
 }
 
-input.product--quantity {
+.product--quantity {
     padding: 4px 6px;
     width: 3em;
     border: 1px solid #bdbdbd;
@@ -30,6 +30,9 @@ input.product--quantity {
     margin: 5px 1px;
     background-image: none;
     font-size: 12px;
+    &[disabled] {
+        border:none;
+    }
 }
 
 .product--button {
@@ -52,6 +55,7 @@ input.product--quantity {
         transform: translateY(2px);
     }
 }
+
 
 .swatch-button {
     background: transparent;
@@ -117,6 +121,12 @@ input.product--quantity {
     &:hover .out-of-stock {
         display: block;
     }
+    &:hover .on-backorder {
+        display:block;
+    }
+    .on-backorder {
+        background: #fc0;
+    }
 }
 
 .current-color {
@@ -128,12 +138,18 @@ input.product--quantity {
     min-width: 10em;
     font-size: 0.8em;
     color: #bf0000;
-    bottom: 33px;
+    bottom: 36px;
     background: #fff;
     padding: 8px;
     border: 1px solid;
     text-align: center;
     vertical-align: middle;
+}
+
+.product-backorder {
+    @extend .out-of-stock;
+    color:#000;
+    display: none;
 }
 
 .running-low {
@@ -151,7 +167,7 @@ input.product--quantity {
         cursor: pointer;
     }
     .selected {
-        border: 1px solid #eb5190;
+        border: 2px solid #eb5190;
     }
 }
 
@@ -163,7 +179,7 @@ input.product--quantity {
     img {
         cursor: pointer;
         &.selected {
-            border: 1px solid #eb5190;
+            border: 2px solid #eb5190;
         }
     }
 }
@@ -184,7 +200,7 @@ input.product--quantity {
     button {
         outline: none;
         &.selected {
-            border: 1px solid #eb5190;
+            border: 2px solid #eb5190;
         }
     }
 }
