@@ -55,8 +55,6 @@ test('selecting a out of stock product should not be allowed', function() {
     });
 });
 
-
-
 test('selecting a product size enables add product button', function() {
     browser.pressButton('XS', function() {
         var productBtn = browser.query('.product--button');
@@ -69,8 +67,6 @@ test('selecting a product size adds selected class to the button', function() {
         return browser.button('XS').className.indexOf('selected').should.not.eql(-1);
     });
 });
-
-
 
 test('inputing a non-numeric value, will result in input eql 1', function() {
     browser.pressButton('XS');

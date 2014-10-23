@@ -188,12 +188,14 @@ SPIProto.selectSize = function(e) {
     sizeText.textContent = 'Size: ' + e.target.textContent;
     sizesArray.forEach(function(size) {
         polyFill.removeClass(size.children[0], 'selected');
+        size.children[0].parentElement.removeAttribute('data-is-selected');
         if (size.children[0].nextElementSibling) {
             polyFill.addClass(size.children[0].nextElementSibling, 'hidden');
         }
         if (e.target.textContent === size.children[0].getAttribute('data-product-size')) {
             if (!size.children[0].disabled) {
                 polyFill.addClass(size.children[0], 'selected');
+                size.children[0].parentElement.setAttribute('data-is-selected', true);
                 return size.children[0].nextElementSibling &&
                     polyFill.removeClass(size.children[0].nextElementSibling, 'hidden');
             }
@@ -223,7 +225,8 @@ SPIProto.checkStockLevel = function() {
     var sizesArray = [].slice.call(sizes);
     sizesArray.forEach(function(size) {
         if (size.className.indexOf('hidden') === -1 &&
-            size.getAttribute('data-is-disabled') === '') {
+            size.getAttribute('data-is-disabled') === '' &&
+            size.getAttribute('data-is-selected')) {
             this.productButton.disabled = false;
         }
     }.bind(this));

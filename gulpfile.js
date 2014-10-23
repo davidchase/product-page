@@ -1,6 +1,5 @@
 'use strict';
 
-
 var fs = require('fs');
 var dir = './tasks/';
 var tasks = fs.readdirSync(dir);

@@ -1,6 +1,7 @@
 'use strict';
 
-var productService = require('../services/productService');
+// symlinked into the node_modules dir freepeople
+var productService = require('freepeople/productService');
 
 module.exports = function(req, reply) {
     productService
