@@ -1,4 +1,4 @@
 'use strict';
 // PDP
-// require('./product');
-require('./product/productStream');
+require('./product');
+// require('./product/productStream');

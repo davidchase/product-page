@@ -1,6 +1,5 @@
 'use strict';
-// Testing if for loop better than forEach
-// probably moot for now...
+
 var polyFill = require('../lib/classList');
 var janitor = require('../lib/janitor');
 

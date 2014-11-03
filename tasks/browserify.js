@@ -18,8 +18,8 @@ gulp.task('bro', function() {
         .transform(html)
         .bundle()
         .pipe(source('app.js'))
-        // .pipe(buffer())
-        // .pipe(ugilfy())
+        .pipe(buffer())
+        .pipe(ugilfy())
         .pipe(gulp.dest('./client/dist/js'))
         .on('error', function(err) {
             console.log(err);
