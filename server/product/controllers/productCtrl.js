@@ -5,7 +5,7 @@ var productService = require('freepeople/productService');
 
 module.exports = function(req, reply) {
     productService
-        .getProducts()
+        .getProducts(req.params.productId)
         .then(function(response) {
             var thumbnails = response.entity.product.colors[0].viewCode;
             reply.view('./product/views/index', {
