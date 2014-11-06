@@ -1,3 +1,4 @@
+'use strict';
 // Temp storage of handlebar helpers
 // may need to relocate if becomes large..
 var Handlebars = require('handlebars');
