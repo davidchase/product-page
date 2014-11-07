@@ -1,7 +1,11 @@
 'use strict';
-
+// Testing if for loop better than forEach
+// probably moot for now...
 var polyFill = require('../lib/classList');
 var janitor = require('../lib/janitor');
+var rest = require('rest');
+var mime = require('rest/interceptor/mime');
+var errorCode = require('rest/interceptor/errorCode');
 
 var SingleProductItem = function() {
     this.productDetails = document.querySelector('.product-details');
@@ -150,14 +154,36 @@ SPIProto.selectSize = function(e) {
 
 SPIProto.addToBasket = function() {
     var sendObj;
+    var cookie;
+    var client = rest.wrap(mime).wrap(errorCode);
+    var cookies = document.cookie.split('; ');
     janitor.sanitizeInput(this.quantityInput);
     sendObj = {
-        productId: this.queryFromProduct('.product-id').innerHTML.replace(/\D/ig, ''),
+        skuId: this.queryFromProduct('.product-id').innerHTML.replace(/\D/ig, ''),
         size: this.sizes.querySelector('.selected').innerHTML,
         quantity: this.quantityInput.value,
         color: this.currentColor.innerHTML
     };
-    console.log(sendObj, JSON.stringify(sendObj));
+    cookies.forEach(function(c) {
+        if (c.indexOf('basket') > -1) {
+            cookie = c.replace('basket=', '');
+        }
+    });
+    return client({
+        method: 'POST',
+        path: '/api/cart',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Urbn-Auth-Token': cookie
+        },
+        entity: JSON.stringify(sendObj)
+    }).then(function(response) {
+        location.replace('/cart');
+        console.log(response.entity);
+    }).otherwise(function(err) {
+        console.error(err.entity);
+    });
+
 };
 
 SPIProto.checkStockLevel = function() {

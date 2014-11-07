@@ -10,6 +10,9 @@ Handlebars.registerHelper('when', function(left, operator, right, options) {
         'eq': function() {
             return left === right ? options.fn(this) : '';
         },
+        'notEql': function() {
+            return left !== right ? options.fn(this) : '';
+        },
         'lt': function() {
             return left < right ? options.fn(this) : '';
         },
